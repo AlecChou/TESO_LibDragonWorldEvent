@@ -13,6 +13,8 @@ Dragon.lua
 DragonList.lua
 DragonStatus.lua
 Events.lua
+Timer.lua
+FlyTimer.lua
 Zone.lua
 Run.lua
 

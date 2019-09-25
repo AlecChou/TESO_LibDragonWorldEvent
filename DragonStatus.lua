@@ -6,7 +6,8 @@ LibDragonWorldEvent.DragonStatus.list = {
     killed  = "killed",
     waiting = "waiting",
     fight   = "fight",
-    weak    = "weak"
+    weak    = "weak",
+    flying  = "flying",
 }
 
 -- @var table : All map pin available and the corresponding status

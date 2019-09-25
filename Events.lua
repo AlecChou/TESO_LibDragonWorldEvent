@@ -8,9 +8,10 @@ LibDragonWorldEvent.Events.callbackEvents  = {
         resetStatus  = "LibDragonWE_Event_Dragon_ResetStatus",
         poped        = "LibDragonWE_Event_Dragon_Poped",
         killed       = "LibDragonWE_Event_Dragon_Killed",
-        waitOrFly    = "LibDragonWE_Event_Dragon_WaitOrFly",
+        waiting      = "LibDragonWE_Event_Dragon_Waiting",
         fight        = "LibDragonWE_Event_Dragon_Fight",
         weak         = "LibDragonWE_Event_Dragon_Weak",
+        flying       = "LibDragonWE_Event_Dragon_flying",
     },
     dragonList   = {
         reset     = "LibDragonWE_Event_DragonList_Reset",
@@ -76,6 +77,11 @@ function LibDragonWorldEvent.Events.onWEActivate(eventCode, worldEventInstanceId
     end
 
     local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+
+    if dragon == nil then -- dragon not already created
+        return
+    end
+
     dragon:poped()
 end
 
@@ -95,6 +101,11 @@ function LibDragonWorldEvent.Events.onWEDeactivate(eventCode, worldEventInstance
     end
 
     local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+
+    if dragon == nil then -- dragon not already created
+        return
+    end
+
     dragon:changeStatus(LibDragonWorldEvent.DragonStatus.list.killed)
 end
 
@@ -103,9 +114,9 @@ end
 --
 -- @param number eventCode
 -- @param number worldEventInstanceId The concerned world event (aka dragon).
--- string unitTag
--- number MapDisplayPinType oldPinType
--- number MapDisplayPinType newPinType
+-- @param string unitTag The dragon's unitTag
+-- @param number oldPinType the old pinType
+-- @param number newPinType the new pinType
 --]]
 function LibDragonWorldEvent.Events.onWEUnitPin(eventCode, worldEventInstanceId, unitTag, oldPinType, newPinType)
     if LibDragonWorldEvent.ready == false then
@@ -119,7 +130,41 @@ function LibDragonWorldEvent.Events.onWEUnitPin(eventCode, worldEventInstanceId,
     local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
     local status = LibDragonWorldEvent.DragonStatus:convertMapPin(newPinType)
 
+    if dragon == nil then -- dragon not already created
+        return
+    end
+
+    if status == LibDragonWorldEvent.DragonStatus.list.waiting and dragon.justPoped == true then
+        status = LibDragonWorldEvent.DragonStatus.list.flying
+    end
+
     dragon:changeStatus(status, unitTag, newPinType)
+end
+
+--[[
+-- Called when a World Event change location
+--
+-- @param number eventCode
+-- @param number worldEventInstanceId The concerned world event (aka dragon).
+-- @param number oldWorldEventLocationId The old dragon's locationId
+-- @param number newWorldEventLocationId The new dragon's locationId
+--]]
+function LibDragonWorldEvent.Events.onWELocChanged(eventCode, worldEventInstanceId, oldWorldEventLocationId, newWorldEventLocationId)
+    if DragonTracker.ready == false then
+        return
+    end
+
+    local dragon       = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    local flyingStatus = LibDragonWorldEvent.DragonStatus.list.flying
+
+    if dragon == nil then -- dragon not already created
+        return
+    end
+
+    -- Check because on a pop dragon, we have events onWEActivate, onWEUnitPin and onWELocChanged
+    if dragon.status.current ~= flyingStatus then
+        dragon:changeStatus(flyingStatus)
+    end
 end
 
 --[[

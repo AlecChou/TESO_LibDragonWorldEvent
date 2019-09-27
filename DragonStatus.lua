@@ -54,7 +54,14 @@ end
 --]]
 function LibDragonWorldEvent.DragonStatus.checkForDragon(dragon)
     dragon:updateUnit()
-    local realStatus = LibDragonWorldEvent.DragonStatus:convertMapPin(dragon.unit.pin)
+
+    local realStatus    = LibDragonWorldEvent.DragonStatus:convertMapPin(dragon.unit.pin)
+    local waitingStatus = LibDragonWorldEvent.DragonStatus.list.waiting
+    local flyingStatus  = LibDragonWorldEvent.DragonStatus.list.flying
+
+    if realStatus == waitingStatus and dragon.status.current == flyingStatus then
+        realStatus = flyingStatus
+    end
 
     if dragon.status.current ~= realStatus then
         dragon:resetWithStatus(realStatus)

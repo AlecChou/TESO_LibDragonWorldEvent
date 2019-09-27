@@ -22,6 +22,7 @@ LibDragonWorldEvent.Zone.nbZone         = 2
 LibDragonWorldEvent.Zone.list           = {
     [1] = { -- North Elsweyr
         mapZoneIdx = 680,
+        mapName    = "elsweyr/elsweyr_base",
         nbDragons  = 3,
         dragons    = {
             title = {
@@ -38,6 +39,7 @@ LibDragonWorldEvent.Zone.list           = {
     },
     [2] = { -- South Elsweyr
         mapZoneIdx = 719,
+        mapName    = "southernelsweyr/southernelsweyr_base",
         nbDragons  = 2,
         dragons    = {
             title = {

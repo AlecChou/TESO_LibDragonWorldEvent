@@ -41,9 +41,10 @@ Note : Dark anchor, world bosses, etc are not trigger WorldEvent events. So I ca
 
 ## Status
 
-There are 5 status displayed :
+There are 6 status displayed :
 
-* Waiting or flying : Dragon just appears, and flying, or it's on the ground and waiting for the fight.
+* Flying : Dragon just appears, and flying.
+* Waiting : Dragon is on the ground and waiting for the fight.
 * In fight : Currently in fight against players, with his life > 50%.
 * In fight (life < 50%) : Currently in fight against players, with his life < 50%.
 * Killed : Dead.
@@ -58,6 +59,8 @@ There are loaded in order :
 * DragonList.lua
 * DragonStatus.lua
 * Events.lua
+* Timer.lua
+* FlyTimer.lua
 * Zone.lua
 * Run.lua
 
@@ -104,9 +107,11 @@ Methods :
 * `LibDragonWorldEvent.Dragon:execStatusFunction` : To call the method dedicated to a status when a dragon change its status from `changeStatus()`.
 * `LibDragonWorldEvent.Dragon:poped` : Called when the dragon pop
 * `LibDragonWorldEvent.Dragon:killed` : Called when the dragon is killed
-* `LibDragonWorldEvent.Dragon:waitOrFly` : Called when the dragon is now "wait or fly"
+* `LibDragonWorldEvent.Dragon:waiting` : Called when the dragon now waiting player
 * `LibDragonWorldEvent.Dragon:fight` : Called when the dragon go in fight
 * `LibDragonWorldEvent.Dragon:weak` : Called when the dragon is now weak
+* `LibDragonWorldEvent.Dragon:flying` : Called when the dragon start to fly
+* `LibDragonWorldEvent.Dragon:onLanded` : Called when the dragon just landed
 
 Events :
 
@@ -125,14 +130,20 @@ callback : `function(table dragon)`
 * `LibDragonWorldEvent.Events.callbackEvents.dragon.killed`  
 When the dragon is killed.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.waitOrFly`  
-When the dragon is now "wait or fly".  
+* `LibDragonWorldEvent.Events.callbackEvents.dragon.waiting`  
+When the dragon waiting player.  
 callback : `function(table dragon)`
 * `LibDragonWorldEvent.Events.callbackEvents.dragon.fight`  
 When the dragon go in fight.  
 callback : `function(table dragon)`
 * `LibDragonWorldEvent.Events.callbackEvents.dragon.weak`  
 When the dragon is now weak.  
+callback : `function(table dragon)`
+* `LibDragonWorldEvent.Events.callbackEvents.dragon.flying`  
+When the dragon start to fly.  
+callback : `function(table dragon)`
+* `LibDragonWorldEvent.Events.callbackEvents.dragon.landed`  
+When the dragon just landed.  
 callback : `function(table dragon)`
 
 ### DragonList.lua
@@ -189,6 +200,7 @@ Property :
   * `waiting`
   * `fight`
   * `weak`
+  * `flying`
 * `mapPinList` : All map pin available and the corresponding status
   * `MAP_PIN_TYPE_DRAGON_IDLE_HEALTHY` : `list.waiting`
   * `MAP_PIN_TYPE_DRAGON_IDLE_WEAK` : `list.waiting`
@@ -229,11 +241,43 @@ Methods :
 
 * `LibDragonWorldEvent.Events.onLoaded` : Called when the addon is loaded
 * `LibDragonWorldEvent.Events.onLoadScreen` : Called after each load screen
-* * `LibDragonWorldEvent.Events.onWEActivate` : Called when a World Event start (aka dragon pop).
+* `LibDragonWorldEvent.Events.onWEActivate` : Called when a World Event start (aka dragon pop).
 * `LibDragonWorldEvent.Events.onWEDeactivate` : Called when a World Event is finished (aka dragon killed).
 * `LibDragonWorldEvent.Events.onWEUnitPin` : Called when a World Event has this map pin changed (aka new dragon or dragon in fight).
 * `LibDragonWorldEvent.Events.onGuiChanged` : Called when something changes in the GUI (like open inventory).  
 Used to debug only, the line to add the listener on the event is commented.
+
+### Timer.lua
+
+Table : `LibDragonWorldEvent.Timer`
+
+Contain all function to manage a timer
+
+Properties :
+
+* `name` : The timer's name
+* `enabled` : If the timer is enabled or not
+* `time` : The timer clock in ms
+
+Methods :
+
+* `LibDragonWorldEvent.Timer:enable` : Enable the timer
+* `LibDragonWorldEvent.Timer:disable` : Disable the timer
+* `LibDragonWorldEvent.Timer.update` : Callback function on timer. Called each `LibDragonWorldEvent.Timer.time` ms.
+* `LibDragonWorldEvent.Timer:changeStatus` : Call the method to enable or disable timer according to newStatus value
+
+### FlyTimer.lua
+
+Table : `LibDragonWorldEvent.FlyTimer`  
+Extends : `LibDragonWorldEvent.Timer`
+
+Contain all function to manage the timer used to know if a dragon currently flying or not
+
+Methods :
+
+* `DragonTracker.GUITimer:new` : To create a new instance of FlyTimer. There are one instance by dragon.
+* `DragonTracker.GUITimer:disable` : Disable the timer; Override the parent function to call the function `Dragon:onLanded()`.
+* `DragonTracker.GUITimer.update` : Callback function on timer. Called each 1sec in dragons zone. Check if the dragon fly or not.
 
 ### Zone.lua
 
@@ -252,6 +296,7 @@ Properties :
 * `list` : List of info about zones with dragons.
   Each value is a table with keys :
   * `mapZoneIdx` : The zone's MapZoneIndex
+  * `mapName` : The zone/subzone name; Formated to LibMapPins format.
   * `nbDragons` : Number of dragon in the zone
   * `dragons` : Info about each dragon
     * `title` : Title to use for each dragon

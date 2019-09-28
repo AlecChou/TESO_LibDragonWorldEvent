@@ -126,6 +126,12 @@ function LibDragonWorldEvent.Dragon:changeStatus(newStatus, unitTag, unitPin)
     if unitPin ~= nil then
         self.unit.pin = unitPin
     end
+
+    -- To disable flyTimer if dragon change of status before the end of timer
+    -- For example, sometimes, dragon go in fight before to be landed :o
+    if self.fly.timer ~= nil and self.status.current ~= LibDragonWorldEvent.DragonStatus.list.flying then
+        self.fly.timer:disable()
+    end
     
     LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
         LibDragonWorldEvent.Events.callbackEvents.dragon.changeStatus,
@@ -243,4 +249,21 @@ function LibDragonWorldEvent.Dragon:flying()
         LibDragonWorldEvent.Events.callbackEvents.dragon.flying,
         self
     )
+end
+
+--[[
+-- Called when the dragon has landed
+--]]
+function LibDragonWorldEvent.Dragon:onLanded()
+    local flyingStatus  = LibDragonWorldEvent.DragonStatus.list.flying
+    local waitingStatus = LibDragonWorldEvent.DragonStatus.list.waiting
+
+    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
+        LibDragonWorldEvent.Events.callbackEvents.dragon.landed,
+        self
+    )
+
+    if self.status.current == flyingStatus then
+        self:changeStatus(waitingStatus)
+    end
 end

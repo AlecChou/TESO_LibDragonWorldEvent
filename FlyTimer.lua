@@ -48,6 +48,13 @@ function LibDragonWorldEvent.FlyTimer:update()
 
     if stopTimer == true then
         self:disable()
-        self.dragon:changeStatus(LibDragonWorldEvent.DragonStatus.list.waiting)
     end
+end
+
+--[[
+-- Override LibDragonWorldEvent.Timer:disable() to sent the status "landed"
+--]]
+function LibDragonWorldEvent.FlyTimer:disable()
+    LibDragonWorldEvent.Timer.disable(self)
+    self.dragon:onLanded()
 end

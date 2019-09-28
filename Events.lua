@@ -12,6 +12,7 @@ LibDragonWorldEvent.Events.callbackEvents  = {
         fight        = "LibDragonWE_Event_Dragon_Fight",
         weak         = "LibDragonWE_Event_Dragon_Weak",
         flying       = "LibDragonWE_Event_Dragon_flying",
+        landed       = "LibDragonWE_Event_Dragon_landed",
     },
     dragonList   = {
         reset     = "LibDragonWE_Event_DragonList_Reset",

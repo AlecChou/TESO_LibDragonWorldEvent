@@ -151,7 +151,7 @@ end
 -- @param number newWorldEventLocationId The new dragon's locationId
 --]]
 function LibDragonWorldEvent.Events.onWELocChanged(eventCode, worldEventInstanceId, oldWorldEventLocationId, newWorldEventLocationId)
-    if DragonTracker.ready == false then
+    if LibDragonWorldEvent.ready == false then
         return
     end
 

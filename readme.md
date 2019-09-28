@@ -275,9 +275,9 @@ Contain all function to manage the timer used to know if a dragon currently flyi
 
 Methods :
 
-* `DragonTracker.GUITimer:new` : To create a new instance of FlyTimer. There are one instance by dragon.
-* `DragonTracker.GUITimer:disable` : Disable the timer; Override the parent function to call the function `Dragon:onLanded()`.
-* `DragonTracker.GUITimer.update` : Callback function on timer. Called each 1sec in dragons zone. Check if the dragon fly or not.
+* `LibDragonWorldEvent.GUITimer:new` : To create a new instance of FlyTimer. There are one instance by dragon.
+* `LibDragonWorldEvent.GUITimer:disable` : Disable the timer; Override the parent function to call the function `Dragon:onLanded()`.
+* `LibDragonWorldEvent.GUITimer.update` : Callback function on timer. Called each 1sec in dragons zone. Check if the dragon fly or not.
 
 ### Zone.lua
 

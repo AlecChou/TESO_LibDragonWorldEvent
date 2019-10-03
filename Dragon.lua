@@ -127,6 +127,10 @@ function LibDragonWorldEvent.Dragon:changeStatus(newStatus, unitTag, unitPin)
         self.unit.pin = unitPin
     end
 
+    if self.unit.tag == "invalid" then
+        self:updateUnit()
+    end
+
     -- To disable flyTimer if dragon change of status before the end of timer
     -- For example, sometimes, dragon go in fight before to be landed :o
     if self.fly.timer ~= nil and self.status.current ~= LibDragonWorldEvent.DragonStatus.list.flying then
@@ -182,6 +186,10 @@ end
 function LibDragonWorldEvent.Dragon:poped()
     self.justPoped       = true
     self.repop.repopTime = os.time()
+
+    if self.unit.tag == "invalid" then
+        self:updateUnit()
+    end
 
     if self.repop.killTime ~= 0 then
         local diffTime = self.repop.repopTime - self.repop.killTime

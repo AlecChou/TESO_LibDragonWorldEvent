@@ -112,7 +112,7 @@ function LibDragonWorldEvent.Zone:checkDragonZone(currentMapZoneIdx)
     end
 
     -- If we are in a dungeon/delve or battleground : no world event.
-    if GetMapContentType() ~= MAP_CONTENT_NONE then
+    if IsUnitInDungeon("player") then
         self.onDragonMap = false
     end
 

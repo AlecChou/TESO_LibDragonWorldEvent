@@ -26,9 +26,16 @@ LibDragonWorldEvent.Zone.list           = {
         nbDragons  = 3,
         dragons    = {
             title = {
-                [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
-                [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH),
-                [3] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_WEST)
+                cp = {
+                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
+                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_EAST),
+                    [3] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_WEST)
+                },
+                ln = {
+                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_PROWLS_EDGE),
+                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_SANDBLOWN),
+                    [3] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_SCAB_RIDGE)
+                }
             },
             WEInstanceId = {
                 [1] = 2,
@@ -43,8 +50,14 @@ LibDragonWorldEvent.Zone.list           = {
         nbDragons  = 2,
         dragons    = {
             title = {
-                [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
-                [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH)
+                cp = {
+                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
+                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH)
+                },
+                ln = {
+                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
+                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH)
+                },
             },
             WEInstanceId = {
                 [1] = 12,

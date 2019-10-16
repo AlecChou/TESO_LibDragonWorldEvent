@@ -1,9 +1,15 @@
 -- ENGLISH LANGUAGE LOCALIZATION
 
 -- Cardinal points
-ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH", "North")
-ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH", "South")
-ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_WEST",  "West ")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH",      "North")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH",      "South")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_EAST", "South East")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_WEST", "South West")
+
+-- Location names
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_LN_PROWLS_EDGE", "Prowl's Edge") -- North
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_LN_SANDBLOWN",   "Sandblown") -- South-East
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_LN_SCAB_RIDGE",  "Scab Ridge") -- South-West
 
 -- Dragon status
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_STATUS_FIGHT",   "In fight")

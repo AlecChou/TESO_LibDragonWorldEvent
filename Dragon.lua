@@ -14,7 +14,10 @@ function LibDragonWorldEvent.Dragon:new(dragonIdx, WEInstanceId)
         dragonIdx    = dragonIdx,
         WEInstanceId = WEInstanceId,
         WEId         = nil,
-        title        = LibDragonWorldEvent.Zone.info.dragons.title[dragonIdx],
+        title        = {
+            cp = LibDragonWorldEvent.Zone.info.dragons.title.cp[dragonIdx],
+            ln = LibDragonWorldEvent.Zone.info.dragons.title.ln[dragonIdx]
+        },
         unit         = {
             tag = nil,
             pin = nil,

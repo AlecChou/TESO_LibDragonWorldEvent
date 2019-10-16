@@ -12,6 +12,7 @@ Initialise.lua
 Dragon.lua
 DragonList.lua
 DragonStatus.lua
+DragonType.lua
 Events.lua
 Timer.lua
 FlyTimer.lua

@@ -22,6 +22,13 @@ function LibDragonWorldEvent.Dragon:new(dragonIdx, WEInstanceId)
             tag = nil,
             pin = nil,
         },
+        type         = {
+            colorTxt  = "",
+            colorRGB  = "",
+            name      = "",
+            abilityId = 0,
+            maxHP     = 0,
+        },
         position     = {
             x = 0,
             y = 0,
@@ -46,6 +53,7 @@ function LibDragonWorldEvent.Dragon:new(dragonIdx, WEInstanceId)
     setmetatable(newDragon, self)
 
     newDragon:updateUnit()
+    newDragon:updateType()
     LibDragonWorldEvent.DragonStatus:initForDragon(newDragon)
 
     -- Not need, already updated each 1 second
@@ -74,6 +82,32 @@ function LibDragonWorldEvent.Dragon:updateUnit()
 
     self.unit.tag = GetWorldEventInstanceUnitTag(self.WEInstanceId, 1)
     self.unit.pin = GetWorldEventInstanceUnitPinType(self.WEInstanceId, self.unit.tag)
+end
+
+--[[
+-- Update dragon type info
+--]]
+function LibDragonWorldEvent.Dragon:updateType()
+    local typeInfo = LibDragonWorldEvent.DragonType:obtainForDragon(self)
+
+    if typeInfo == nil then
+        self.type.colorTxt  = ""
+        self.type.colorRGB  = ""
+        self.type.name      = ""
+        self.type.abilityId = 0
+        self.type.maxHP     = 0
+    else
+        self.type.colorTxt  = typeInfo.dragonColorTxt
+        self.type.colorRGB  = typeInfo.dragonColorRGB
+        self.type.name      = typeInfo.dragonName
+        self.type.abilityId = typeInfo.abilityId
+        self.type.maxHP     = typeInfo.maxHP
+    end
+
+    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
+        LibDragonWorldEvent.Events.callbackEvents.dragon.changeType,
+        self
+    )
 end
 
 --[[
@@ -134,6 +168,11 @@ function LibDragonWorldEvent.Dragon:changeStatus(newStatus, unitTag, unitPin)
         self:updateUnit()
     end
 
+    -- If dragon type info cannot be obtained when poped, we retry when status change
+    if self.type.color == "" and newStatus ~= LibDragonWorldEvent.DragonStatus.list.killed then
+        self:updateType()
+    end
+
     -- To disable flyTimer if dragon change of status before the end of timer
     -- For example, sometimes, dragon go in fight before to be landed :o
     if self.fly.timer ~= nil and self.status.current ~= LibDragonWorldEvent.DragonStatus.list.flying then
@@ -158,6 +197,8 @@ function LibDragonWorldEvent.Dragon:resetWithStatus(newStatus)
     self.status.previous = nil
     self.status.current  = newStatus
     self.status.time     = 0
+
+    self:updateType()
 
     LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
         LibDragonWorldEvent.Events.callbackEvents.dragon.resetStatus,
@@ -193,6 +234,8 @@ function LibDragonWorldEvent.Dragon:poped()
     if self.unit.tag == "invalid" then
         self:updateUnit()
     end
+
+    self:updateType()
 
     if self.repop.killTime ~= 0 then
         local diffTime = self.repop.repopTime - self.repop.killTime

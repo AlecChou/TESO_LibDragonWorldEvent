@@ -18,3 +18,9 @@ ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_STATUS_UNKNOWN", "Inconnu")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_STATUS_WAITING", "En attente")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_STATUS_FLYING",  "En vol")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_STATUS_WEAK",    "En combat (santé < 50%)")
+
+-- Dragon color
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_RED",   "dragon rouge")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_GREY",  "dragon gris")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_BLACK", "dragon noir")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_WHITE", "dragon blanc")

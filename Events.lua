@@ -5,6 +5,7 @@ LibDragonWorldEvent.Events.callbackEvents  = {
     dragon       = {
         new          = "LibDragonWE_Event_Dragon_New",
         changeStatus = "LibDragonWE_Event_Dragon_ChangeStatus",
+        changeType   = "LibDragonWE_Event_Dragon_ChangeType",
         resetStatus  = "LibDragonWE_Event_Dragon_ResetStatus",
         poped        = "LibDragonWE_Event_Dragon_Poped",
         killed       = "LibDragonWE_Event_Dragon_Killed",

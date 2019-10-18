@@ -24,7 +24,7 @@ function LibDragonWorldEvent.Dragon:new(dragonIdx, WEInstanceId)
         },
         type         = {
             colorTxt  = "",
-            colorRGB  = "",
+            colorRGB  = nil,
             name      = "",
             abilityId = 0,
             maxHP     = 0,
@@ -92,7 +92,7 @@ function LibDragonWorldEvent.Dragon:updateType()
 
     if typeInfo == nil then
         self.type.colorTxt  = ""
-        self.type.colorRGB  = ""
+        self.type.colorRGB  = nil
         self.type.name      = ""
         self.type.abilityId = 0
         self.type.maxHP     = 0

@@ -169,7 +169,7 @@ function LibDragonWorldEvent.Dragon:changeStatus(newStatus, unitTag, unitPin)
     end
 
     -- If dragon type info cannot be obtained when poped, we retry when status change
-    if self.type.color == "" and newStatus ~= LibDragonWorldEvent.DragonStatus.list.killed then
+    if self.type.colorRGB == nil and newStatus ~= LibDragonWorldEvent.DragonStatus.list.killed then
         self:updateType()
     end
 

@@ -1,8 +1,8 @@
 ## Title: LibDragonWorldEvent
 ## Description: Lib to know Elsweyr dragons info
-## Version: 1.1.1
+## Version: 1.1.2
 ## Author: bulton-fr
-## APIVersion: 100029
+## APIVersion: 100031 100032
 ## IsLibrary: true
 
 lang\en.lua

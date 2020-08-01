@@ -1,27 +1,29 @@
 LibDragonWorldEvent.Zone = {}
 
 -- @var boolean If player is on a zone with dragon
-LibDragonWorldEvent.Zone.onDragonZone   = false -- Elweyr is a zone
+LibDragonWorldEvent.Zone.onDragonZone = false -- Elweyr is a zone
 
 -- @var boolean If player is on a map with dragon
-LibDragonWorldEvent.Zone.onDragonMap    = false -- A delve is a map in the zone
+LibDragonWorldEvent.Zone.onDragonMap  = false -- A delve is a map in the zone
 
--- @var nil|number The previous MapZoneIndex
-LibDragonWorldEvent.Zone.lastMapZoneIdx = nil
+-- @var nil|number The previous ZoneId
+LibDragonWorldEvent.Zone.lastZoneId   = nil
 
 -- @var boolean If the player has changed zone
-LibDragonWorldEvent.Zone.changedZone    = false
+LibDragonWorldEvent.Zone.changedZone  = false
 
 -- @var ref-to-table Info about the current zone (ref to list value corresponding to the zone)
-LibDragonWorldEvent.Zone.info           = nil
+LibDragonWorldEvent.Zone.info         = nil
 
 -- @var number Number of zone in the list
-LibDragonWorldEvent.Zone.nbZone         = 2
+LibDragonWorldEvent.Zone.nbZone       = 2
 
 -- @var table List of info about zones with dragons.
-LibDragonWorldEvent.Zone.list           = {
+-- Note : mapZone if formatted for LibMapPins, so used by DragonNextLocation
+-- and not for the zone detection.
+LibDragonWorldEvent.Zone.list         = {
     [1] = { -- North Elsweyr
-        mapZoneIdx = 680,
+        zoneId     = 1086,
         mapName    = "elsweyr/elsweyr_base",
         nbDragons  = 3,
         dragons    = {
@@ -45,7 +47,7 @@ LibDragonWorldEvent.Zone.list           = {
         },
     },
     [2] = { -- South Elsweyr
-        mapZoneIdx = 719,
+        zoneId     = 1133,
         mapName    = "southernelsweyr/southernelsweyr_base",
         nbDragons  = 2,
         dragons    = {
@@ -73,14 +75,14 @@ LibDragonWorldEvent.Zone.repopTime = 0
 -- Update info about the current zone.
 --]]
 function LibDragonWorldEvent.Zone:updateInfo()
-    local currentMapZoneIdx = GetCurrentMapZoneIndex()
+    local currentZoneId = GetZoneId(GetCurrentMapZoneIndex())
 
-    self:checkDragonZone(currentMapZoneIdx)
+    self:checkDragonZone(currentZoneId)
 
     self.changedZone = false
-    if self.lastMapZoneIdx ~= currentMapZoneIdx then
-        self.changedZone    = true
-        self.lastMapZoneIdx = currentMapZoneIdx
+    if self.lastZoneId ~= currentZoneId then
+        self.changedZone = true
+        self.lastZoneId  = currentZoneId
     end
 
     LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
@@ -92,19 +94,19 @@ end
 --[[
 -- Check if it's a zone with dragons.
 --
--- @param number currentMapZoneIdx The current MapZoneIndex
+-- @param number currentZoneId The current zone id
 --]]
-function LibDragonWorldEvent.Zone:checkDragonZone(currentMapZoneIdx)
+function LibDragonWorldEvent.Zone:checkDragonZone(currentZoneId)
     self.onDragonZone = false
     self.onDragonMap  = false
 
-    local listIdx    = 1
-    local mapZoneIdx = 0
+    local listIdx = 1
+    local zoneId  = 0
 
     for listIdx=1, self.nbZone do
-        mapZoneIdx = self.list[listIdx].mapZoneIdx
+        zoneId = self.list[listIdx].zoneId
 
-        if currentMapZoneIdx == mapZoneIdx then
+        if currentZoneId == zoneId then
             self.onDragonMap  = true
             self.onDragonZone = true
             self.info         = self.list[listIdx]

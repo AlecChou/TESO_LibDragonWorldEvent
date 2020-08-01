@@ -295,7 +295,7 @@ Properties :
 * `nbZone` : Number of zone in the list
 * `list` : List of info about zones with dragons.
   Each value is a table with keys :
-  * `mapZoneIdx` : The zone's MapZoneIndex
+  * `zoneId` : The zone id
   * `mapName` : The zone/subzone name; Formated to LibMapPins format.
   * `nbDragons` : Number of dragon in the zone
   * `dragons` : Info about each dragon

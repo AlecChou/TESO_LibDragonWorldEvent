@@ -23,13 +23,32 @@ LibDragonWorldEvent.Events.callbackEvents  = {
         createAll = "LibDragonWE_Event_DragonList_CreateAll",
     },
     dragonStatus = {
-        initDragon     = "LibDragonWE_Event_DragonStatus_InitDragon",
-        checkAllDragon = "LibDragonWE_Event_DragonStatus_CheckAllDragon",
-        checkDragon    = "LibDragonWE_Event_DragonStatus_CheckDragon",
+        initDragon = "LibDragonWE_Event_DragonStatus_InitDragon",
+        checkAll   = "LibDragonWE_Event_DragonStatus_CheckAll",
+        check      = "LibDragonWE_Event_DragonStatus_Check",
+    },
+    harrowStorm       = {
+        new          = "LibDragonWE_Event_HarrowStorm_New",
+        changeStatus = "LibDragonWE_Event_HarrowStorm_ChangeStatus",
+        resetStatus  = "LibDragonWE_Event_HarrowStorm_ResetStatus",
+        started      = "LibDragonWE_Event_HarrowStorm_Started",
+        ended        = "LibDragonWE_Event_HarrowStorm_Ended",
+    },
+    harrowStormList   = {
+        reset     = "LibDragonWE_Event_HarrowStormList_Reset",
+        add       = "LibDragonWE_Event_HarrowStormList_Add",
+        update    = "LibDragonWE_Event_HarrowStormList_Update",
+        removeAll = "LibDragonWE_Event_HarrowStormList_RemoveAll",
+        createAll = "LibDragonWE_Event_HarrowStormList_CreateAll",
+    },
+    harrowStormStatus = {
+        initHarrowStorm = "LibDragonWE_Event_HarrowStormStatus_InitHarrowStorm",
+        checkAll        = "LibDragonWE_Event_HarrowStormStatus_CheckAll",
+        check           = "LibDragonWE_Event_HarrowStormStatus_Check",
     },
     zone         = {
-        updateInfo      = "LibDragonWE_Event_Zone_UpdateInfo",
-        checkDragonZone = "LibDragonWE_Event_Zone_CheckDragonZone",
+        updateInfo       = "LibDragonWE_Event_Zone_UpdateInfo",
+        checkWorldEvents = "LibDragonWE_Event_Zone_CheckWorldEvents",
     }
 }
 
@@ -59,8 +78,7 @@ function LibDragonWorldEvent.Events.onLoadScreen(eventCode, initial)
     end
 
     LibDragonWorldEvent.Zone:updateInfo()
-    LibDragonWorldEvent.DragonList:update()
-    LibDragonWorldEvent.DragonStatus:checkAllDragon()
+    LibDragonWorldEvent.Zone:initWorldEvent()
 end
 
 --[[
@@ -74,17 +92,25 @@ function LibDragonWorldEvent.Events.onWEActivate(eventCode, worldEventInstanceId
         return
     end
 
-    if LibDragonWorldEvent.Zone.onDragonMap == false then
-        return
+    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == true then
+        local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+
+        if dragon == nil then -- dragon not already created
+            return
+        end
+
+        dragon:poped()
+    elseif LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap == true then
+        local _, poiIdx = GetWorldEventPOIInfo(worldEventInstanceId)
+        LibDragonWorldEvent.HarrowStorms.HarrowStormList:updateWEInstanceId(poiIdx)
+        local harrowStorm = LibDragonWorldEvent.HarrowStorms.HarrowStormList:obtainForPoiIdx(poiIdx)
+
+        if harrowStorm == nil then
+            return
+        end
+
+        harrowStorm:changeStatus(LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list.started)
     end
-
-    local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-
-    if dragon == nil then -- dragon not already created
-        return
-    end
-
-    dragon:poped()
 end
 
 --[[
@@ -98,17 +124,24 @@ function LibDragonWorldEvent.Events.onWEDeactivate(eventCode, worldEventInstance
         return
     end
 
-    if LibDragonWorldEvent.Zone.onDragonMap == false then
-        return
+    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == true then
+        local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+
+        if dragon == nil then -- dragon not already created
+            return
+        end
+
+        dragon:changeStatus(LibDragonWorldEvent.Dragons.DragonStatus.list.killed)
+    elseif LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap == true then
+        local harrowStorm = LibDragonWorldEvent.HarrowStorms.HarrowStormList:obtainLastActive()
+
+        if harrowStorm == nil then
+            return
+        end
+
+        harrowStorm:changeStatus(LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list.ended)
+        harrowStorm:ended()
     end
-
-    local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-
-    if dragon == nil then -- dragon not already created
-        return
-    end
-
-    dragon:changeStatus(LibDragonWorldEvent.DragonStatus.list.killed)
 end
 
 --[[
@@ -125,19 +158,19 @@ function LibDragonWorldEvent.Events.onWEUnitPin(eventCode, worldEventInstanceId,
         return
     end
 
-    if LibDragonWorldEvent.Zone.onDragonMap == false then
+    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == false then
         return
     end
 
-    local dragon = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-    local status = LibDragonWorldEvent.DragonStatus:convertMapPin(newPinType)
+    local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    local status = LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin(newPinType)
 
     if dragon == nil then -- dragon not already created
         return
     end
 
-    if status == LibDragonWorldEvent.DragonStatus.list.waiting and dragon.justPoped == true then
-        status = LibDragonWorldEvent.DragonStatus.list.flying
+    if status == LibDragonWorldEvent.Dragons.DragonStatus.list.waiting and dragon.justPoped == true then
+        status = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
     end
 
     dragon:changeStatus(status, unitTag, newPinType)
@@ -156,8 +189,12 @@ function LibDragonWorldEvent.Events.onWELocChanged(eventCode, worldEventInstance
         return
     end
 
-    local dragon       = LibDragonWorldEvent.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-    local flyingStatus = LibDragonWorldEvent.DragonStatus.list.flying
+    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == false then
+        return
+    end
+
+    local dragon       = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    local flyingStatus = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
 
     if dragon == nil then -- dragon not already created
         return

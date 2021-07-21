@@ -1,18 +1,23 @@
 ## Title: LibDragonWorldEvent
-## Description: Lib to know Elsweyr dragons info
-## Version: 1.1.2
+## Description: Lib to know World Events info
+## Version: 2.0.0
 ## Author: bulton-fr
-## APIVersion: 100031 100032
+## APIVersion: 100035
 ## IsLibrary: true
 
 lang\en.lua
 lang\$(language).lua
 
 Initialise.lua
-Dragon.lua
-DragonList.lua
-DragonStatus.lua
-DragonType.lua
+Dragons/Dragon.lua
+Dragons/DragonList.lua
+Dragons/DragonStatus.lua
+Dragons/DragonType.lua
+Dragons/ZoneInfo.lua
+HarrowStorms/HarrowStorm.lua
+HarrowStorms/HarrowStormList.lua
+HarrowStorms/HarrowStormStatus.lua
+HarrowStorms/ZoneInfo.lua
 Events.lua
 Timer.lua
 FlyTimer.lua

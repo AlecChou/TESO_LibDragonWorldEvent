@@ -76,7 +76,7 @@ Declared variables :
 
 ### Dragon.lua
 
-Table : `LibDragonWorldEvent.Dragon`
+Table : `LibDragonWorldEvent.Dragons.Dragon`
 
 Contain all info about a dragon. It's a OOP like with one instance of Dragon by dragon on the map.
 
@@ -99,19 +99,19 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent.Dragon:new` : To instanciate a new Dragon instance
-* `LibDragonWorldEvent.Dragon:updateWEId` : Update the property `WEId`
-* `LibDragonWorldEvent.Dragon:updateUnit` : Update properties `unit.tag` and `unit.pin`
-* `LibDragonWorldEvent.Dragon:changeStatus` : Change the dragon's current status
-* `LibDragonWorldEvent.Dragon:resetWithStatus` : Reset dragon's status (like just instancied) with a status.
-* `LibDragonWorldEvent.Dragon:execStatusFunction` : To call the method dedicated to a status when a dragon change its status from `changeStatus()`.
-* `LibDragonWorldEvent.Dragon:poped` : Called when the dragon pop
-* `LibDragonWorldEvent.Dragon:killed` : Called when the dragon is killed
-* `LibDragonWorldEvent.Dragon:waiting` : Called when the dragon now waiting player
-* `LibDragonWorldEvent.Dragon:fight` : Called when the dragon go in fight
-* `LibDragonWorldEvent.Dragon:weak` : Called when the dragon is now weak
-* `LibDragonWorldEvent.Dragon:flying` : Called when the dragon start to fly
-* `LibDragonWorldEvent.Dragon:onLanded` : Called when the dragon just landed
+* `LibDragonWorldEvent.Dragons.Dragon:new` : To instanciate a new Dragon instance
+* `LibDragonWorldEvent.Dragons.Dragon:updateWEId` : Update the property `WEId`
+* `LibDragonWorldEvent.Dragons.Dragon:updateUnit` : Update properties `unit.tag` and `unit.pin`
+* `LibDragonWorldEvent.Dragons.Dragon:changeStatus` : Change the dragon's current status
+* `LibDragonWorldEvent.Dragons.Dragon:resetWithStatus` : Reset dragon's status (like just instancied) with a status.
+* `LibDragonWorldEvent.Dragons.Dragon:execStatusFunction` : To call the method dedicated to a status when a dragon change its status from `changeStatus()`.
+* `LibDragonWorldEvent.Dragons.Dragon:poped` : Called when the dragon pop
+* `LibDragonWorldEvent.Dragons.Dragon:killed` : Called when the dragon is killed
+* `LibDragonWorldEvent.Dragons.Dragon:waiting` : Called when the dragon now waiting player
+* `LibDragonWorldEvent.Dragons.Dragon:fight` : Called when the dragon go in fight
+* `LibDragonWorldEvent.Dragons.Dragon:weak` : Called when the dragon is now weak
+* `LibDragonWorldEvent.Dragons.Dragon:flying` : Called when the dragon start to fly
+* `LibDragonWorldEvent.Dragons.Dragon:onLanded` : Called when the dragon just landed
 
 Events :
 
@@ -148,7 +148,7 @@ callback : `function(table dragon)`
 
 ### DragonList.lua
 
-Table : `LibDragonWorldEvent.DragonList`
+Table : `LibDragonWorldEvent.Dragons.DragonList`
 
 Contain all instancied Dragon instance.
 
@@ -160,13 +160,13 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent.DragonList:reset` : Reset the list
-* `LibDragonWorldEvent.DragonList:add` : Add a new dragon to the list
-* `LibDragonWorldEvent.DragonList:execOnAll` : Execute a callback for all dragon
-* `LibDragonWorldEvent.DragonList:obtainForWEInstanceId` : Obtain the dragon instance for a WEInstanceId
-* `LibDragonWorldEvent.DragonList:update` : To update the list : remove all dragon or create all dragon compared to Zone info.
-* `LibDragonWorldEvent.DragonList:removeAll` : Remove all dragon and reset GUI items
-* `LibDragonWorldEvent.DragonList:createAll` : Create all dragon for the zone
+* `LibDragonWorldEvent.Dragons.DragonList:reset` : Reset the list
+* `LibDragonWorldEvent.Dragons.DragonList:add` : Add a new dragon to the list
+* `LibDragonWorldEvent.Dragons.DragonList:execOnAll` : Execute a callback for all dragon
+* `LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId` : Obtain the dragon instance for a WEInstanceId
+* `LibDragonWorldEvent.Dragons.DragonList:update` : To update the list : remove all dragon or create all dragon compared to Zone info.
+* `LibDragonWorldEvent.Dragons.DragonList:removeAll` : Remove all dragon and reset GUI items
+* `LibDragonWorldEvent.Dragons.DragonList:createAll` : Create all dragon for the zone
 
 Events :
 
@@ -188,7 +188,7 @@ callback : `function(table dragonList)`
 
 ### DragonStatus.lua
 
-Table : `LibDragonWorldEvent.DragonStatus`
+Table : `LibDragonWorldEvent.Dragons.DragonStatus`
 
 Contain all functions used to check and define the current status of a dragon, or all dragons.
 
@@ -209,10 +209,10 @@ Property :
 
 Methods :
 
-* `LibDragonWorldEvent.DragonStatus:initForDragon` : Initialise status for a dragon
-* `LibDragonWorldEvent.DragonStatus:checkAllDragon` : Check status for all dragon in DragonList
-* `LibDragonWorldEvent.DragonStatus:checkForDragon` : Check the status of a dragon to know if the status is correct or not.
-* `LibDragonWorldEvent.DragonStatus:convertMapPin` : Convert from `MAP_PIN_TYPE_DRAGON_*` constant value to `LibDragonWorldEvent.DragonStatus.list` value
+* `LibDragonWorldEvent.Dragons.DragonStatus:initForDragon` : Initialise status for a dragon
+* `LibDragonWorldEvent.Dragons.DragonStatus:checkAllDragon` : Check status for all dragon in DragonList
+* `LibDragonWorldEvent.Dragons.DragonStatus:checkForDragon` : Check the status of a dragon to know if the status is correct or not.
+* `LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin` : Convert from `MAP_PIN_TYPE_DRAGON_*` constant value to `LibDragonWorldEvent.Dragons.DragonStatus.list` value
 
 Events :
 

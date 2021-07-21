@@ -1,6 +1,6 @@
-LibDragonWorldEvent.DragonType = {}
+LibDragonWorldEvent.Dragons.DragonType = {}
 
-LibDragonWorldEvent.DragonType.list = {
+LibDragonWorldEvent.Dragons.DragonType.list = {
     [1] = {
         colorTxt = GetString(SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_RED),
         colorRGB  = {r=1, g=0, b=0},
@@ -35,7 +35,7 @@ LibDragonWorldEvent.DragonType.list = {
 --
 -- @return table
 --]]
-function LibDragonWorldEvent.DragonType:obtainInfo(unitTag, buffIdx)
+function LibDragonWorldEvent.Dragons.DragonType:obtainInfo(unitTag, buffIdx)
     local
         buffName,
         timeStarted,
@@ -76,7 +76,7 @@ end
 --
 -- @return table|nil
 --]]
-function LibDragonWorldEvent.DragonType:obtainForDragon(dragon)
+function LibDragonWorldEvent.Dragons.DragonType:obtainForDragon(dragon)
     local nbBuff   = GetNumBuffs(dragon.unit.tag)
     local buffIdx  = 1
     local buffInfo = nil

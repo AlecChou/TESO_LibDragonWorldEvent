@@ -1,15 +1,15 @@
-LibDragonWorldEvent = {}
+LibWorldEvents = {}
 
-LibDragonWorldEvent.name  = "LibDragonWorldEvent"
-LibDragonWorldEvent.ready = false
+LibWorldEvents.name  = "LibWorldEvents"
+LibWorldEvents.ready = false
 
 -- Define sub-directory namespaces
-LibDragonWorldEvent.Dragons      = {}
-LibDragonWorldEvent.HarrowStorms = {}
+LibWorldEvents.Dragons      = {}
+LibWorldEvents.HarrowStorms = {}
 
 --[[
 -- Module initialiser
 --]]
-function LibDragonWorldEvent:Initialise()
-    LibDragonWorldEvent.ready = true
+function LibWorldEvents:Initialise()
+    LibWorldEvents.ready = true
 end

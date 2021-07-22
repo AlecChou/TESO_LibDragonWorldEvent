@@ -1,24 +1,24 @@
-LibDragonWorldEvent.Dragons.DragonList = {}
+LibWorldEvents.Dragons.DragonList = {}
 
 -- @var table List of all dragons instancied
-LibDragonWorldEvent.Dragons.DragonList.list = {}
+LibWorldEvents.Dragons.DragonList.list = {}
 
 -- @var number Number of item in list
-LibDragonWorldEvent.Dragons.DragonList.nb   = 0
+LibWorldEvents.Dragons.DragonList.nb   = 0
 
 -- @var table Map table with WEInstanceId as key, and index in list as value
-LibDragonWorldEvent.Dragons.DragonList.WEInstanceIdToListIdx = {}
+LibWorldEvents.Dragons.DragonList.WEInstanceIdToListIdx = {}
 
 --[[
 -- Reset the list
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:reset()
+function LibWorldEvents.Dragons.DragonList:reset()
     self.list                  = {}
     self.nb                    = 0
     self.WEInstanceIdToListIdx = {}
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonList.reset,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonList.reset,
         self
     )
 end
@@ -28,7 +28,7 @@ end
 --
 -- @param Dragon dragon : The dragon instance to add
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:add(dragon)
+function LibWorldEvents.Dragons.DragonList:add(dragon)
     local newIdx = self.nb + 1
 
     self.list[newIdx] = dragon
@@ -36,8 +36,8 @@ function LibDragonWorldEvent.Dragons.DragonList:add(dragon)
 
     self.WEInstanceIdToListIdx[dragon.WEInstanceId] = newIdx
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonList.add,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonList.add,
         self,
         dragon
     )
@@ -49,7 +49,7 @@ end
 -- @param function callback : A callback called for each dragon in the list.
 -- The callback take the dragon instance as parameter.
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:execOnAll(callback)
+function LibWorldEvents.Dragons.DragonList:execOnAll(callback)
     local dragonIdx = 1
 
     for dragonIdx = 1, self.nb do
@@ -62,7 +62,7 @@ end
 --
 -- @return Dragon
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(WEInstanceId)
+function LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(WEInstanceId)
     local dragonIdx = self.WEInstanceIdToListIdx[WEInstanceId]
 
     return self.list[dragonIdx]
@@ -71,17 +71,17 @@ end
 --[[
 -- To update the list : remove all dragon or create all dragon compared to Zone info.
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:update()
-    if LibDragonWorldEvent.Zone.changedZone == true then
+function LibWorldEvents.Dragons.DragonList:update()
+    if LibWorldEvents.Zone.changedZone == true then
         self:removeAll()
     end
 
-    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == true and self.nb == 0 then
+    if LibWorldEvents.Dragons.ZoneInfo.onMap == true and self.nb == 0 then
         self:createAll()
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonList.update,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonList.update,
         self
     )
 end
@@ -89,11 +89,11 @@ end
 --[[
 -- Remove all dragon instance in the list and reset GUI items list
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:removeAll()
+function LibWorldEvents.Dragons.DragonList:removeAll()
     self:reset()
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonList.removeAll,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonList.removeAll,
         self
     )
 end
@@ -101,17 +101,17 @@ end
 --[[
 -- Create a dragon instance for each dragon in the zone, and add it to the list.
 --]]
-function LibDragonWorldEvent.Dragons.DragonList:createAll()
+function LibWorldEvents.Dragons.DragonList:createAll()
     self:removeAll()
 
-    for dragonIdx, WEInstanceId in ipairs(LibDragonWorldEvent.Zone.info.list.WEInstanceId) do
-        local dragon = LibDragonWorldEvent.Dragons.Dragon:new(dragonIdx, WEInstanceId)
+    for dragonIdx, WEInstanceId in ipairs(LibWorldEvents.Zone.info.list.WEInstanceId) do
+        local dragon = LibWorldEvents.Dragons.Dragon:new(dragonIdx, WEInstanceId)
 
         self:add(dragon)
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonList.createAll,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonList.createAll,
         self
     )
 end

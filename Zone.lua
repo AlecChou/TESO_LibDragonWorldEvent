@@ -1,6 +1,6 @@
-LibDragonWorldEvent.Zone = {}
+LibWorldEvents.Zone = {}
 
-LibDragonWorldEvent.Zone.WORLD_EVENT_TYPE = {
+LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
     DRAGON = "dragon",
     HARROWSTORM = "harrowstorm",
 
@@ -10,23 +10,23 @@ LibDragonWorldEvent.Zone.WORLD_EVENT_TYPE = {
 }
 
 -- @var boolean If player is on a map with dragon
-LibDragonWorldEvent.Zone.onWorldEventMap = false
+LibWorldEvents.Zone.onWorldEventMap = false
 
-LibDragonWorldEvent.Zone.worldEventMapType = nil
+LibWorldEvents.Zone.worldEventMapType = nil
 
 -- @var nil|number The previous ZoneId
-LibDragonWorldEvent.Zone.lastZoneId   = nil
+LibWorldEvents.Zone.lastZoneId   = nil
 
 -- @var boolean If the player has changed zone
-LibDragonWorldEvent.Zone.changedZone  = false
+LibWorldEvents.Zone.changedZone  = false
 
 -- @var ref-to-table Info about the current zone (ref to list value corresponding to the zone)
-LibDragonWorldEvent.Zone.info         = nil
+LibWorldEvents.Zone.info         = nil
 
 --[[
 -- Update info about the current zone.
 --]]
-function LibDragonWorldEvent.Zone:updateInfo()
+function LibWorldEvents.Zone:updateInfo()
     local currentZoneId = GetZoneId(GetCurrentMapZoneIndex())
 
     self:checkWorldEvent(currentZoneId)
@@ -37,13 +37,13 @@ function LibDragonWorldEvent.Zone:updateInfo()
         self.lastZoneId  = currentZoneId
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.zone.updateInfo,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.zone.updateInfo,
         self
     )
 end
 
-function LibDragonWorldEvent.Zone:resetZoneData()
+function LibWorldEvents.Zone:resetZoneData()
     self.info              = nil
     self.onWorldEventMap   = false
     self.worldEventMapType = nil
@@ -54,12 +54,12 @@ end
 --
 -- @param number currentZoneId The current zone id
 --]]
-function LibDragonWorldEvent.Zone:checkWorldEvent(currentZoneId)
+function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     self:resetZoneData()
 
-    local dragonsZoneList     = LibDragonWorldEvent.Dragons.ZoneInfo:obtainList()
-    local harrowstormZoneList = LibDragonWorldEvent.HarrowStorms.ZoneInfo:obtainList()
-    -- local dolmenMapList      = LibDragonWorldEvent.Dolmens.ZoneInfo:obtainList() --Not plugged in game yet
+    local dragonsZoneList     = LibWorldEvents.Dragons.ZoneInfo:obtainList()
+    local harrowstormZoneList = LibWorldEvents.HarrowStorms.ZoneInfo:obtainList()
+    -- local dolmenMapList      = LibWorldEvents.Dolmens.ZoneInfo:obtainList() --Not plugged in game yet
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.HARROWSTORM, harrowstormZoneList)
@@ -69,13 +69,13 @@ function LibDragonWorldEvent.Zone:checkWorldEvent(currentZoneId)
         self:resetZoneData()
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.zone.checkWorldEvents,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.zone.checkWorldEvents,
         self
     )
 end
 
-function LibDragonWorldEvent.Zone:checkWorldEventForType(currentZoneId, weType, zoneList)
+function LibWorldEvents.Zone:checkWorldEventForType(currentZoneId, weType, zoneList)
     if self.onWorldEventMap == true then
         return
     end
@@ -90,23 +90,23 @@ function LibDragonWorldEvent.Zone:checkWorldEventForType(currentZoneId, weType, 
     end
 end
 
-function LibDragonWorldEvent.Zone:initWorldEvent()
+function LibWorldEvents.Zone:initWorldEvent()
     if self.onWorldEventMap == false then
         return
     end
 
-    LibDragonWorldEvent.Dragons.ZoneInfo.onMap      = false
-    LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap = false
+    LibWorldEvents.Dragons.ZoneInfo.onMap      = false
+    LibWorldEvents.HarrowStorms.ZoneInfo.onMap = false
 
     if self.worldEventMapType == self.WORLD_EVENT_TYPE.DRAGON then
-        LibDragonWorldEvent.Dragons.ZoneInfo.onMap = true
+        LibWorldEvents.Dragons.ZoneInfo.onMap = true
 
-        LibDragonWorldEvent.Dragons.DragonList:update()
-        LibDragonWorldEvent.Dragons.DragonStatus:checkAllDragon()
+        LibWorldEvents.Dragons.DragonList:update()
+        LibWorldEvents.Dragons.DragonStatus:checkAllDragon()
     elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.HARROWSTORM then
-        LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap = true
+        LibWorldEvents.HarrowStorms.ZoneInfo.onMap = true
 
-        LibDragonWorldEvent.HarrowStorms.HarrowStormList:update()
-        LibDragonWorldEvent.HarrowStorms.HarrowStormStatus:checkAllHarrowStorm()
+        LibWorldEvents.HarrowStorms.HarrowStormList:update()
+        LibWorldEvents.HarrowStorms.HarrowStormStatus:checkAllHarrowStorm()
     end
 end

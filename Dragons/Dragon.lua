@@ -1,5 +1,5 @@
-LibDragonWorldEvent.Dragons.Dragon = {}
-LibDragonWorldEvent.Dragons.Dragon.__index = LibDragonWorldEvent.Dragons.Dragon
+LibWorldEvents.Dragons.Dragon = {}
+LibWorldEvents.Dragons.Dragon.__index = LibWorldEvents.Dragons.Dragon
 
 --[[
 -- Instanciate a new Dragon "object"
@@ -9,14 +9,14 @@ LibDragonWorldEvent.Dragons.Dragon.__index = LibDragonWorldEvent.Dragons.Dragon
 --
 -- @return Dragon
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:new(dragonIdx, WEInstanceId)
+function LibWorldEvents.Dragons.Dragon:new(dragonIdx, WEInstanceId)
     local newDragon = {
         dragonIdx    = dragonIdx,
         WEInstanceId = WEInstanceId,
         WEId         = nil,
         title        = {
-            cp = LibDragonWorldEvent.Zone.info.list.title.cp[dragonIdx],
-            ln = LibDragonWorldEvent.Zone.info.list.title.ln[dragonIdx]
+            cp = LibWorldEvents.Zone.info.list.title.cp[dragonIdx],
+            ln = LibWorldEvents.Zone.info.list.title.ln[dragonIdx]
         },
         unit         = {
             tag = nil,
@@ -54,13 +54,13 @@ function LibDragonWorldEvent.Dragons.Dragon:new(dragonIdx, WEInstanceId)
 
     newDragon:updateUnit()
     newDragon:updateType()
-    LibDragonWorldEvent.Dragons.DragonStatus:initForDragon(newDragon)
+    LibWorldEvents.Dragons.DragonStatus:initForDragon(newDragon)
 
     -- Not need, already updated each 1 second
-    -- LibDragonWorldEvent.GUI:updateForDragon(newDragon)
+    -- LibWorldEvents.GUI:updateForDragon(newDragon)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.new,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.new,
         newDragon
     )
 
@@ -70,14 +70,14 @@ end
 --[[
 -- Update the WorldEventId
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:updateWEId()
+function LibWorldEvents.Dragons.Dragon:updateWEId()
     self.WEId = GetWorldEventId(self.WEInstanceId)
 end
 
 --[[
 -- Update the dragon's UnitTag and UnitPinType
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:updateUnit()
+function LibWorldEvents.Dragons.Dragon:updateUnit()
     self:updateWEId()
 
     self.unit.tag = GetWorldEventInstanceUnitTag(self.WEInstanceId, 1)
@@ -87,8 +87,8 @@ end
 --[[
 -- Update dragon type info
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:updateType()
-    local typeInfo = LibDragonWorldEvent.Dragons.DragonType:obtainForDragon(self)
+function LibWorldEvents.Dragons.Dragon:updateType()
+    local typeInfo = LibWorldEvents.Dragons.DragonType:obtainForDragon(self)
 
     if typeInfo == nil then
         self.type.colorTxt  = ""
@@ -104,8 +104,8 @@ function LibDragonWorldEvent.Dragons.Dragon:updateType()
         self.type.maxHP     = typeInfo.maxHP
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.changeType,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.changeType,
         self
     )
 end
@@ -115,7 +115,7 @@ end
 --
 -- @param table|nil position (default nil) Current position
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:updatePosition(position)
+function LibWorldEvents.Dragons.Dragon:updatePosition(position)
     if position == nil then
         local position = self:obtainPosition()
     end
@@ -130,7 +130,7 @@ end
 --
 -- @return table
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:obtainPosition()
+function LibWorldEvents.Dragons.Dragon:obtainPosition()
     local zoneId, worldX, worldY, worldZ = GetUnitWorldPosition(self.unit.tag)
 
     return {
@@ -147,7 +147,7 @@ end
 -- @param string unitTag (default nil) The new unitTag
 -- @param number unitPin (default nil) The new unitPin
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:changeStatus(newStatus, unitTag, unitPin)
+function LibWorldEvents.Dragons.Dragon:changeStatus(newStatus, unitTag, unitPin)
     self.status.previous = self.status.current
     self.status.current  = newStatus
     self.status.time     = os.time()
@@ -169,18 +169,18 @@ function LibDragonWorldEvent.Dragons.Dragon:changeStatus(newStatus, unitTag, uni
     end
 
     -- If dragon type info cannot be obtained when poped, we retry when status change
-    if self.type.colorRGB == nil and newStatus ~= LibDragonWorldEvent.Dragons.DragonStatus.list.killed then
+    if self.type.colorRGB == nil and newStatus ~= LibWorldEvents.Dragons.DragonStatus.list.killed then
         self:updateType()
     end
 
     -- To disable flyTimer if dragon change of status before the end of timer
     -- For example, sometimes, dragon go in fight before to be landed :o
-    if self.fly.timer ~= nil and self.status.current ~= LibDragonWorldEvent.Dragons.DragonStatus.list.flying then
+    if self.fly.timer ~= nil and self.status.current ~= LibWorldEvents.Dragons.DragonStatus.list.flying then
         self.fly.timer:disable()
     end
     
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.changeStatus,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.changeStatus,
         self,
         newStatus
     )
@@ -193,15 +193,15 @@ end
 --
 -- @param string newStatus The dragon's new status in DragonStatus.list
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:resetWithStatus(newStatus)
+function LibWorldEvents.Dragons.Dragon:resetWithStatus(newStatus)
     self.status.previous = nil
     self.status.current  = newStatus
     self.status.time     = 0
 
     self:updateType()
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.resetStatus,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.resetStatus,
         self,
         newStatus
     )
@@ -210,16 +210,16 @@ end
 --[[
 -- Execute the dedicated function for a status
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:execStatusFunction()
-    if self.status.current == LibDragonWorldEvent.Dragons.DragonStatus.list.killed then
+function LibWorldEvents.Dragons.Dragon:execStatusFunction()
+    if self.status.current == LibWorldEvents.Dragons.DragonStatus.list.killed then
         self:killed()
-    elseif self.status.current == LibDragonWorldEvent.Dragons.DragonStatus.list.waiting then
+    elseif self.status.current == LibWorldEvents.Dragons.DragonStatus.list.waiting then
         self:waiting()
-    elseif self.status.current == LibDragonWorldEvent.Dragons.DragonStatus.list.fight then
+    elseif self.status.current == LibWorldEvents.Dragons.DragonStatus.list.fight then
         self:fight()
-    elseif self.status.current == LibDragonWorldEvent.Dragons.DragonStatus.list.weak then
+    elseif self.status.current == LibWorldEvents.Dragons.DragonStatus.list.weak then
         self:weak()
-    elseif self.status.current == LibDragonWorldEvent.Dragons.DragonStatus.list.flying then
+    elseif self.status.current == LibWorldEvents.Dragons.DragonStatus.list.flying then
         self:flying()
     end
 end
@@ -227,7 +227,7 @@ end
 --[[
 -- Called when the dragon (re)pop
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:poped()
+function LibWorldEvents.Dragons.Dragon:poped()
     self.justPoped       = true
     self.repop.repopTime = os.time()
 
@@ -239,11 +239,11 @@ function LibDragonWorldEvent.Dragons.Dragon:poped()
 
     if self.repop.killTime ~= 0 then
         local diffTime = self.repop.repopTime - self.repop.killTime
-        LibDragonWorldEvent.Dragons.ZoneInfo.repopTime = diffTime
+        LibWorldEvents.Dragons.ZoneInfo.repopTime = diffTime
     end
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.poped,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.poped,
         self
     )
 end
@@ -251,11 +251,11 @@ end
 --[[
 -- Called when the dragon is killed
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:killed()
+function LibWorldEvents.Dragons.Dragon:killed()
     self.repop.killTime = os.time()
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.killed,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.killed,
         self
     )
 end
@@ -263,11 +263,11 @@ end
 --[[
 -- Called when the dragon start to waiting
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:waiting()
+function LibWorldEvents.Dragons.Dragon:waiting()
     self.flyTimer = nil
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.waiting,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.waiting,
         self
     )
 end
@@ -275,9 +275,9 @@ end
 --[[
 -- Called when the dragon go in fight
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:fight()
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.fight,
+function LibWorldEvents.Dragons.Dragon:fight()
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.fight,
         self
     )
 end
@@ -285,9 +285,9 @@ end
 --[[
 -- Called when the dragon is now weak
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:weak()
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.weak,
+function LibWorldEvents.Dragons.Dragon:weak()
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.weak,
         self
     )
 end
@@ -295,12 +295,12 @@ end
 --[[
 -- Called when the dragon start to fly
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:flying()
+function LibWorldEvents.Dragons.Dragon:flying()
     self.fly.startTime = os.time()
-    self.fly.timer     = LibDragonWorldEvent.FlyTimer:new(self)
+    self.fly.timer     = LibWorldEvents.FlyTimer:new(self)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.flying,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.flying,
         self
     )
 end
@@ -308,12 +308,12 @@ end
 --[[
 -- Called when the dragon has landed
 --]]
-function LibDragonWorldEvent.Dragons.Dragon:onLanded()
-    local flyingStatus  = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
-    local waitingStatus = LibDragonWorldEvent.Dragons.DragonStatus.list.waiting
+function LibWorldEvents.Dragons.Dragon:onLanded()
+    local flyingStatus  = LibWorldEvents.Dragons.DragonStatus.list.flying
+    local waitingStatus = LibWorldEvents.Dragons.DragonStatus.list.waiting
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragon.landed,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragon.landed,
         self
     )
 

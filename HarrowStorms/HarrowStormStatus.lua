@@ -1,7 +1,7 @@
-LibDragonWorldEvent.HarrowStorms.HarrowStormStatus = {}
+LibWorldEvents.HarrowStorms.HarrowStormStatus = {}
 
 -- @var table : List of all status which can be defined
-LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list = {
+LibWorldEvents.HarrowStorms.HarrowStormStatus.list = {
     ended   = "ended",
     started = "started",
 }
@@ -11,11 +11,11 @@ LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list = {
 --
 -- @param Dragon dragon : The dragon with the status to initialise
 --]]
-function LibDragonWorldEvent.HarrowStorms.HarrowStormStatus:initForHarrowStorm(harrowStorm)
+function LibWorldEvents.HarrowStorms.HarrowStormStatus:initForHarrowStorm(harrowStorm)
     self:update(harrowStorm)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.harrowStormStatus.initHarrowStorm,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.harrowStormStatus.initHarrowStorm,
         self,
         harrowStorm
     )
@@ -24,11 +24,11 @@ end
 --[[
 -- Check the status for all dragon instancied
 --]]
-function LibDragonWorldEvent.HarrowStorms.HarrowStormStatus:checkAllHarrowStorm()
-    LibDragonWorldEvent.HarrowStorms.HarrowStormList:execOnAll(self.checkForHarrowStorm)
+function LibWorldEvents.HarrowStorms.HarrowStormStatus:checkAllHarrowStorm()
+    LibWorldEvents.HarrowStorms.HarrowStormList:execOnAll(self.checkForHarrowStorm)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.harrowStormStatus.checkAll,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.harrowStormStatus.checkAll,
         self
     )
 end
@@ -39,17 +39,17 @@ end
 --
 -- @param Dragon dragon The dragon to check
 --]]
-function LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.checkForHarrowStorm(harrowStorm)
-    LibDragonWorldEvent.HarrowStorms.HarrowStormStatus:update(harrowStorm)
+function LibWorldEvents.HarrowStorms.HarrowStormStatus.checkForHarrowStorm(harrowStorm)
+    LibWorldEvents.HarrowStorms.HarrowStormStatus:update(harrowStorm)
     
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.harrowStormStatus.check,
-        LibDragonWorldEvent.HarrowStorms.HarrowStormStatus,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.harrowStormStatus.check,
+        LibWorldEvents.HarrowStorms.HarrowStormStatus,
         harrowStorm
     )
 end
 
-function LibDragonWorldEvent.HarrowStorms.HarrowStormStatus:update(harrowStorm)
+function LibWorldEvents.HarrowStorms.HarrowStormStatus:update(harrowStorm)
     harrowStorm:updateWEInstanceId()
     
     if harrowStorm.WEInstanceId ~= 0 then

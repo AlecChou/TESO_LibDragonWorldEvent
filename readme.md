@@ -8,18 +8,18 @@ Only the game. No addon or library is needed.
 
 ## Install it
 
-Into the addon folder (`Elder Scrolls Online\live\AddOns` in your document folder), you need to have a folder `LibDragonWorldEvent` and copy all files into it.
+Into the addon folder (`Elder Scrolls Online\live\AddOns` in your document folder), you need to have a folder `LibWorldEvents` and copy all files into it.
 
 So you can :
 
-* Clone the repository in the AddOns folder and name it `LibDragonWorldEvent`.
-* Or download the zip file of the last release in github, extract it in the AddOns folder, and rename `TESO_LibDragonWorldEvent-{release}` to `LibDragonWorldEvent`.
+* Clone the repository in the AddOns folder and name it `LibWorldEvents`.
+* Or download the zip file of the last release in github, extract it in the AddOns folder, and rename `TESO_LibWorldEvents-{release}` to `LibWorldEvents`.
 
 ## Use it in your addon
 
 Into the txt file for your addon, just add (not declare lua files for this lib) :
 ```
-## DependsOn: LibDragonWorldEvent
+## DependsOn: LibWorldEvents
 ```
 
 And you have the choice to include it into a `libs` folder, or say to your user to also download the lib.
@@ -70,13 +70,13 @@ Declare all variables and the initialise function.
 
 Declared variables :
 
-* `LibDragonWorldEvent` : The global table for all addon's properties and methods.
-* `LibDragonWorldEvent.name` : The addon name
-* `LibDragonWorldEvent.ready` : If the addon is ready to be used
+* `LibWorldEvents` : The global table for all addon's properties and methods.
+* `LibWorldEvents.name` : The addon name
+* `LibWorldEvents.ready` : If the addon is ready to be used
 
 ### Dragon.lua
 
-Table : `LibDragonWorldEvent.Dragons.Dragon`
+Table : `LibWorldEvents.Dragons.Dragon`
 
 Contain all info about a dragon. It's a OOP like with one instance of Dragon by dragon on the map.
 
@@ -99,56 +99,56 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent.Dragons.Dragon:new` : To instanciate a new Dragon instance
-* `LibDragonWorldEvent.Dragons.Dragon:updateWEId` : Update the property `WEId`
-* `LibDragonWorldEvent.Dragons.Dragon:updateUnit` : Update properties `unit.tag` and `unit.pin`
-* `LibDragonWorldEvent.Dragons.Dragon:changeStatus` : Change the dragon's current status
-* `LibDragonWorldEvent.Dragons.Dragon:resetWithStatus` : Reset dragon's status (like just instancied) with a status.
-* `LibDragonWorldEvent.Dragons.Dragon:execStatusFunction` : To call the method dedicated to a status when a dragon change its status from `changeStatus()`.
-* `LibDragonWorldEvent.Dragons.Dragon:poped` : Called when the dragon pop
-* `LibDragonWorldEvent.Dragons.Dragon:killed` : Called when the dragon is killed
-* `LibDragonWorldEvent.Dragons.Dragon:waiting` : Called when the dragon now waiting player
-* `LibDragonWorldEvent.Dragons.Dragon:fight` : Called when the dragon go in fight
-* `LibDragonWorldEvent.Dragons.Dragon:weak` : Called when the dragon is now weak
-* `LibDragonWorldEvent.Dragons.Dragon:flying` : Called when the dragon start to fly
-* `LibDragonWorldEvent.Dragons.Dragon:onLanded` : Called when the dragon just landed
+* `LibWorldEvents.Dragons.Dragon:new` : To instanciate a new Dragon instance
+* `LibWorldEvents.Dragons.Dragon:updateWEId` : Update the property `WEId`
+* `LibWorldEvents.Dragons.Dragon:updateUnit` : Update properties `unit.tag` and `unit.pin`
+* `LibWorldEvents.Dragons.Dragon:changeStatus` : Change the dragon's current status
+* `LibWorldEvents.Dragons.Dragon:resetWithStatus` : Reset dragon's status (like just instancied) with a status.
+* `LibWorldEvents.Dragons.Dragon:execStatusFunction` : To call the method dedicated to a status when a dragon change its status from `changeStatus()`.
+* `LibWorldEvents.Dragons.Dragon:poped` : Called when the dragon pop
+* `LibWorldEvents.Dragons.Dragon:killed` : Called when the dragon is killed
+* `LibWorldEvents.Dragons.Dragon:waiting` : Called when the dragon now waiting player
+* `LibWorldEvents.Dragons.Dragon:fight` : Called when the dragon go in fight
+* `LibWorldEvents.Dragons.Dragon:weak` : Called when the dragon is now weak
+* `LibWorldEvents.Dragons.Dragon:flying` : Called when the dragon start to fly
+* `LibWorldEvents.Dragons.Dragon:onLanded` : Called when the dragon just landed
 
 Events :
 
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.new`  
+* `LibWorldEvents.Events.callbackEvents.dragon.new`  
 When a new dragon is created.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.changeStatus`  
+* `LibWorldEvents.Events.callbackEvents.dragon.changeStatus`  
 When a dragon change its status.  
 callback : `function(table dragon, string newStatus)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.resetStatus`  
+* `LibWorldEvents.Events.callbackEvents.dragon.resetStatus`  
 When a dragon change its status.  
 callback : `function(table dragon, string newStatus)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.poped`  
+* `LibWorldEvents.Events.callbackEvents.dragon.poped`  
 When the dragon pop.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.killed`  
+* `LibWorldEvents.Events.callbackEvents.dragon.killed`  
 When the dragon is killed.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.waiting`  
+* `LibWorldEvents.Events.callbackEvents.dragon.waiting`  
 When the dragon waiting player.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.fight`  
+* `LibWorldEvents.Events.callbackEvents.dragon.fight`  
 When the dragon go in fight.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.weak`  
+* `LibWorldEvents.Events.callbackEvents.dragon.weak`  
 When the dragon is now weak.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.flying`  
+* `LibWorldEvents.Events.callbackEvents.dragon.flying`  
 When the dragon start to fly.  
 callback : `function(table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragon.landed`  
+* `LibWorldEvents.Events.callbackEvents.dragon.landed`  
 When the dragon just landed.  
 callback : `function(table dragon)`
 
 ### DragonList.lua
 
-Table : `LibDragonWorldEvent.Dragons.DragonList`
+Table : `LibWorldEvents.Dragons.DragonList`
 
 Contain all instancied Dragon instance.
 
@@ -160,35 +160,35 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent.Dragons.DragonList:reset` : Reset the list
-* `LibDragonWorldEvent.Dragons.DragonList:add` : Add a new dragon to the list
-* `LibDragonWorldEvent.Dragons.DragonList:execOnAll` : Execute a callback for all dragon
-* `LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId` : Obtain the dragon instance for a WEInstanceId
-* `LibDragonWorldEvent.Dragons.DragonList:update` : To update the list : remove all dragon or create all dragon compared to Zone info.
-* `LibDragonWorldEvent.Dragons.DragonList:removeAll` : Remove all dragon and reset GUI items
-* `LibDragonWorldEvent.Dragons.DragonList:createAll` : Create all dragon for the zone
+* `LibWorldEvents.Dragons.DragonList:reset` : Reset the list
+* `LibWorldEvents.Dragons.DragonList:add` : Add a new dragon to the list
+* `LibWorldEvents.Dragons.DragonList:execOnAll` : Execute a callback for all dragon
+* `LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId` : Obtain the dragon instance for a WEInstanceId
+* `LibWorldEvents.Dragons.DragonList:update` : To update the list : remove all dragon or create all dragon compared to Zone info.
+* `LibWorldEvents.Dragons.DragonList:removeAll` : Remove all dragon and reset GUI items
+* `LibWorldEvents.Dragons.DragonList:createAll` : Create all dragon for the zone
 
 Events :
 
-* `LibDragonWorldEvent.Events.callbackEvents.dragonList.reset`  
+* `LibWorldEvents.Events.callbackEvents.dragonList.reset`  
 When the list is reset.  
 callback : `function(table dragonList)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonList.add`  
+* `LibWorldEvents.Events.callbackEvents.dragonList.add`  
 When a dragon is added to the list.  
 callback : `function(table dragonList, table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonList.update`  
+* `LibWorldEvents.Events.callbackEvents.dragonList.update`  
 When the list updated with zone info.  
 callback : `function(table dragonList)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonList.removeAll`  
+* `LibWorldEvents.Events.callbackEvents.dragonList.removeAll`  
 When all dragon is removed from the list.  
 callback : `function(table dragonList)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonList.createAll`  
+* `LibWorldEvents.Events.callbackEvents.dragonList.createAll`  
 When all dragon for a zone are instancied.  
 callback : `function(table dragonList)`
 
 ### DragonStatus.lua
 
-Table : `LibDragonWorldEvent.Dragons.DragonStatus`
+Table : `LibWorldEvents.Dragons.DragonStatus`
 
 Contain all functions used to check and define the current status of a dragon, or all dragons.
 
@@ -209,26 +209,26 @@ Property :
 
 Methods :
 
-* `LibDragonWorldEvent.Dragons.DragonStatus:initForDragon` : Initialise status for a dragon
-* `LibDragonWorldEvent.Dragons.DragonStatus:checkAllDragon` : Check status for all dragon in DragonList
-* `LibDragonWorldEvent.Dragons.DragonStatus:checkForDragon` : Check the status of a dragon to know if the status is correct or not.
-* `LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin` : Convert from `MAP_PIN_TYPE_DRAGON_*` constant value to `LibDragonWorldEvent.Dragons.DragonStatus.list` value
+* `LibWorldEvents.Dragons.DragonStatus:initForDragon` : Initialise status for a dragon
+* `LibWorldEvents.Dragons.DragonStatus:checkAllDragon` : Check status for all dragon in DragonList
+* `LibWorldEvents.Dragons.DragonStatus:checkForDragon` : Check the status of a dragon to know if the status is correct or not.
+* `LibWorldEvents.Dragons.DragonStatus:convertMapPin` : Convert from `MAP_PIN_TYPE_DRAGON_*` constant value to `LibWorldEvents.Dragons.DragonStatus.list` value
 
 Events :
 
-* `LibDragonWorldEvent.Events.callbackEvents.dragonStatus.initDragon`  
+* `LibWorldEvents.Events.callbackEvents.dragonStatus.initDragon`  
 When the status of a dragon is initialised.  
 callback : `function(table dragonStatus, table dragon)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonStatus.checkAllDragon`  
+* `LibWorldEvents.Events.callbackEvents.dragonStatus.checkAllDragon`  
 When the status of all instancied dragon is checked.  
 callback : `function(table dragonStatus)`
-* `LibDragonWorldEvent.Events.callbackEvents.dragonStatus.checkDragon`  
+* `LibWorldEvents.Events.callbackEvents.dragonStatus.checkDragon`  
 When the status of a dragon is checked.  
 callback : `function(table dragonStatus, table dragon)`
 
 ### Events.lua
 
-Table : `LibDragonWorldEvent.Events`
+Table : `LibWorldEvents.Events`
 
 Define a callbackManager to fire events, and contain all functions called when a listened event is triggered.
 
@@ -239,17 +239,17 @@ Property :
 
 Methods :
 
-* `LibDragonWorldEvent.Events.onLoaded` : Called when the addon is loaded
-* `LibDragonWorldEvent.Events.onLoadScreen` : Called after each load screen
-* `LibDragonWorldEvent.Events.onWEActivate` : Called when a World Event start (aka dragon pop).
-* `LibDragonWorldEvent.Events.onWEDeactivate` : Called when a World Event is finished (aka dragon killed).
-* `LibDragonWorldEvent.Events.onWEUnitPin` : Called when a World Event has this map pin changed (aka new dragon or dragon in fight).
-* `LibDragonWorldEvent.Events.onGuiChanged` : Called when something changes in the GUI (like open inventory).  
+* `LibWorldEvents.Events.onLoaded` : Called when the addon is loaded
+* `LibWorldEvents.Events.onLoadScreen` : Called after each load screen
+* `LibWorldEvents.Events.onWEActivate` : Called when a World Event start (aka dragon pop).
+* `LibWorldEvents.Events.onWEDeactivate` : Called when a World Event is finished (aka dragon killed).
+* `LibWorldEvents.Events.onWEUnitPin` : Called when a World Event has this map pin changed (aka new dragon or dragon in fight).
+* `LibWorldEvents.Events.onGuiChanged` : Called when something changes in the GUI (like open inventory).  
 Used to debug only, the line to add the listener on the event is commented.
 
 ### Timer.lua
 
-Table : `LibDragonWorldEvent.Timer`
+Table : `LibWorldEvents.Timer`
 
 Contain all function to manage a timer
 
@@ -261,27 +261,27 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent.Timer:enable` : Enable the timer
-* `LibDragonWorldEvent.Timer:disable` : Disable the timer
-* `LibDragonWorldEvent.Timer.update` : Callback function on timer. Called each `LibDragonWorldEvent.Timer.time` ms.
-* `LibDragonWorldEvent.Timer:changeStatus` : Call the method to enable or disable timer according to newStatus value
+* `LibWorldEvents.Timer:enable` : Enable the timer
+* `LibWorldEvents.Timer:disable` : Disable the timer
+* `LibWorldEvents.Timer.update` : Callback function on timer. Called each `LibWorldEvents.Timer.time` ms.
+* `LibWorldEvents.Timer:changeStatus` : Call the method to enable or disable timer according to newStatus value
 
 ### FlyTimer.lua
 
-Table : `LibDragonWorldEvent.FlyTimer`  
-Extends : `LibDragonWorldEvent.Timer`
+Table : `LibWorldEvents.FlyTimer`  
+Extends : `LibWorldEvents.Timer`
 
 Contain all function to manage the timer used to know if a dragon currently flying or not
 
 Methods :
 
-* `LibDragonWorldEvent.GUITimer:new` : To create a new instance of FlyTimer. There are one instance by dragon.
-* `LibDragonWorldEvent.GUITimer:disable` : Disable the timer; Override the parent function to call the function `Dragon:onLanded()`.
-* `LibDragonWorldEvent.GUITimer.update` : Callback function on timer. Called each 1sec in dragons zone. Check if the dragon fly or not.
+* `LibWorldEvents.GUITimer:new` : To create a new instance of FlyTimer. There are one instance by dragon.
+* `LibWorldEvents.GUITimer:disable` : Disable the timer; Override the parent function to call the function `Dragon:onLanded()`.
+* `LibWorldEvents.GUITimer.update` : Callback function on timer. Called each 1sec in dragons zone. Check if the dragon fly or not.
 
 ### Zone.lua
 
-Table : `LibDragonWorldEvent.Zone`
+Table : `LibWorldEvents.Zone`
 
 Contain all function to know if the current zone has dragons or not
 
@@ -304,15 +304,15 @@ Properties :
 
 Methods :
 
-* `LibDragonWorldEvent:updateInfo` : Update info about the current zone.
-* `LibDragonWorldEvent:checkDragonZone` : Check if it's a zone with dragons.
+* `LibWorldEvents:updateInfo` : Update info about the current zone.
+* `LibWorldEvents:checkDragonZone` : Check if it's a zone with dragons.
 
 Events :
 
-* `LibDragonWorldEvent.Events.callbackEvents.Zone.updateInfo`  
+* `LibWorldEvents.Events.callbackEvents.Zone.updateInfo`  
 When info about current zone/map is updated.  
 callback : `function(table Zone)`
-* `LibDragonWorldEvent.Events.callbackEvents.Zone.checkDragonZone`  
+* `LibWorldEvents.Events.callbackEvents.Zone.checkDragonZone`  
 When we check if the map contains dragons.  
 callback : `function(table Zone)`
 

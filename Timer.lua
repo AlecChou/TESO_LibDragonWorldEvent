@@ -1,18 +1,18 @@
-LibDragonWorldEvent.Timer = {}
+LibWorldEvents.Timer = {}
 
 -- @var string name The timer's name
-LibDragonWorldEvent.Timer.name = ""
+LibWorldEvents.Timer.name = ""
 
 -- @var number time The time in ms where update() which will be called
-LibDragonWorldEvent.Timer.time = 0
+LibWorldEvents.Timer.time = 0
 
 -- @var boolean enabled If the timer is enabled or not
-LibDragonWorldEvent.Timer.enabled = false
+LibWorldEvents.Timer.enabled = false
 
 --[[
 -- Enable the timer
 --]]
-function LibDragonWorldEvent.Timer:enable()
+function LibWorldEvents.Timer:enable()
     if self.enabled == true then
         return
     end
@@ -28,7 +28,7 @@ end
 --[[
 -- Disable the timer
 --]]
-function LibDragonWorldEvent.Timer:disable()
+function LibWorldEvents.Timer:disable()
     if self.enabled == false then
         return
     end
@@ -40,7 +40,7 @@ end
 --[[
 -- Callback function on timer.
 --]]
-function LibDragonWorldEvent.Timer:update()
+function LibWorldEvents.Timer:update()
     
 end
 
@@ -49,7 +49,7 @@ end
 --
 -- @param boolean newStatus : true to enable timer, false to disable it
 --]]
-function LibDragonWorldEvent.Timer:changeStatus(newStatus)
+function LibWorldEvents.Timer:changeStatus(newStatus)
     if newStatus == true then
         self:enable()
     else

@@ -1,7 +1,7 @@
-LibDragonWorldEvent.Events = {}
+LibWorldEvents.Events = {}
 
-LibDragonWorldEvent.Events.callbackManager = ZO_CallbackObject:New()
-LibDragonWorldEvent.Events.callbackEvents  = {
+LibWorldEvents.Events.callbackManager = ZO_CallbackObject:New()
+LibWorldEvents.Events.callbackEvents  = {
     dragon       = {
         new          = "LibDragonWE_Event_Dragon_New",
         changeStatus = "LibDragonWE_Event_Dragon_ChangeStatus",
@@ -58,10 +58,10 @@ LibDragonWorldEvent.Events.callbackEvents  = {
 -- @param number eventCode
 -- @param string addonName name of the loaded addon
 --]]
-function LibDragonWorldEvent.Events.onLoaded(eventCode, addOnName)
+function LibWorldEvents.Events.onLoaded(eventCode, addOnName)
     -- The event fires each time *any* addon loads - but we only care about when our own addon loads.
-    if addOnName == LibDragonWorldEvent.name then
-        LibDragonWorldEvent:Initialise()
+    if addOnName == LibWorldEvents.name then
+        LibWorldEvents:Initialise()
     end
 end
 
@@ -72,13 +72,13 @@ end
 -- @param integer eventCode
 -- @param boolean initial : true if the user just logged on, false with a UI reload (for example)
 --]]
-function LibDragonWorldEvent.Events.onLoadScreen(eventCode, initial)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onLoadScreen(eventCode, initial)
+    if LibWorldEvents.ready == false then
         return
     end
 
-    LibDragonWorldEvent.Zone:updateInfo()
-    LibDragonWorldEvent.Zone:initWorldEvent()
+    LibWorldEvents.Zone:updateInfo()
+    LibWorldEvents.Zone:initWorldEvent()
 end
 
 --[[
@@ -87,29 +87,29 @@ end
 -- @param number eventCode
 -- @param number worldEventInstanceId The concerned world event (aka dragon).
 --]]
-function LibDragonWorldEvent.Events.onWEActivate(eventCode, worldEventInstanceId)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
+    if LibWorldEvents.ready == false then
         return
     end
 
-    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == true then
-        local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    if LibWorldEvents.Dragons.ZoneInfo.onMap == true then
+        local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
 
         if dragon == nil then -- dragon not already created
             return
         end
 
         dragon:poped()
-    elseif LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap == true then
+    elseif LibWorldEvents.HarrowStorms.ZoneInfo.onMap == true then
         local _, poiIdx = GetWorldEventPOIInfo(worldEventInstanceId)
-        LibDragonWorldEvent.HarrowStorms.HarrowStormList:updateWEInstanceId(poiIdx)
-        local harrowStorm = LibDragonWorldEvent.HarrowStorms.HarrowStormList:obtainForPoiIdx(poiIdx)
+        LibWorldEvents.HarrowStorms.HarrowStormList:updateWEInstanceId(poiIdx)
+        local harrowStorm = LibWorldEvents.HarrowStorms.HarrowStormList:obtainForPoiIdx(poiIdx)
 
         if harrowStorm == nil then
             return
         end
 
-        harrowStorm:changeStatus(LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list.started)
+        harrowStorm:changeStatus(LibWorldEvents.HarrowStorms.HarrowStormStatus.list.started)
     end
 end
 
@@ -119,27 +119,27 @@ end
 -- @param number eventCode
 -- @param number worldEventInstanceId The concerned world event (aka dragon).
 --]]
-function LibDragonWorldEvent.Events.onWEDeactivate(eventCode, worldEventInstanceId)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onWEDeactivate(eventCode, worldEventInstanceId)
+    if LibWorldEvents.ready == false then
         return
     end
 
-    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == true then
-        local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    if LibWorldEvents.Dragons.ZoneInfo.onMap == true then
+        local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
 
         if dragon == nil then -- dragon not already created
             return
         end
 
-        dragon:changeStatus(LibDragonWorldEvent.Dragons.DragonStatus.list.killed)
-    elseif LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap == true then
-        local harrowStorm = LibDragonWorldEvent.HarrowStorms.HarrowStormList:obtainLastActive()
+        dragon:changeStatus(LibWorldEvents.Dragons.DragonStatus.list.killed)
+    elseif LibWorldEvents.HarrowStorms.ZoneInfo.onMap == true then
+        local harrowStorm = LibWorldEvents.HarrowStorms.HarrowStormList:obtainLastActive()
 
         if harrowStorm == nil then
             return
         end
 
-        harrowStorm:changeStatus(LibDragonWorldEvent.HarrowStorms.HarrowStormStatus.list.ended)
+        harrowStorm:changeStatus(LibWorldEvents.HarrowStorms.HarrowStormStatus.list.ended)
         harrowStorm:ended()
     end
 end
@@ -153,24 +153,24 @@ end
 -- @param number oldPinType the old pinType
 -- @param number newPinType the new pinType
 --]]
-function LibDragonWorldEvent.Events.onWEUnitPin(eventCode, worldEventInstanceId, unitTag, oldPinType, newPinType)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onWEUnitPin(eventCode, worldEventInstanceId, unitTag, oldPinType, newPinType)
+    if LibWorldEvents.ready == false then
         return
     end
 
-    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == false then
+    if LibWorldEvents.Dragons.ZoneInfo.onMap == false then
         return
     end
 
-    local dragon = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-    local status = LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin(newPinType)
+    local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    local status = LibWorldEvents.Dragons.DragonStatus:convertMapPin(newPinType)
 
     if dragon == nil then -- dragon not already created
         return
     end
 
-    if status == LibDragonWorldEvent.Dragons.DragonStatus.list.waiting and dragon.justPoped == true then
-        status = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
+    if status == LibWorldEvents.Dragons.DragonStatus.list.waiting and dragon.justPoped == true then
+        status = LibWorldEvents.Dragons.DragonStatus.list.flying
     end
 
     dragon:changeStatus(status, unitTag, newPinType)
@@ -184,17 +184,17 @@ end
 -- @param number oldWorldEventLocationId The old dragon's locationId
 -- @param number newWorldEventLocationId The new dragon's locationId
 --]]
-function LibDragonWorldEvent.Events.onWELocChanged(eventCode, worldEventInstanceId, oldWorldEventLocationId, newWorldEventLocationId)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onWELocChanged(eventCode, worldEventInstanceId, oldWorldEventLocationId, newWorldEventLocationId)
+    if LibWorldEvents.ready == false then
         return
     end
 
-    if LibDragonWorldEvent.Dragons.ZoneInfo.onMap == false then
+    if LibWorldEvents.Dragons.ZoneInfo.onMap == false then
         return
     end
 
-    local dragon       = LibDragonWorldEvent.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
-    local flyingStatus = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
+    local dragon       = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
+    local flyingStatus = LibWorldEvents.Dragons.DragonStatus.list.flying
 
     if dragon == nil then -- dragon not already created
         return
@@ -210,8 +210,8 @@ end
 -- Called when something change in GUI (like open inventory).
 -- Used to some debug, the add to event is commented.
 --]]
-function LibDragonWorldEvent.Events.onGuiChanged(eventCode)
-    if LibDragonWorldEvent.ready == false then
+function LibWorldEvents.Events.onGuiChanged(eventCode)
+    if LibWorldEvents.ready == false then
         return
     end
 end

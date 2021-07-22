@@ -1,21 +1,21 @@
-LibDragonWorldEvent.FlyTimer         = setmetatable({}, {__index = LibDragonWorldEvent.Timer})
-LibDragonWorldEvent.FlyTimer.__index = LibDragonWorldEvent.FlyTimer
+LibWorldEvents.FlyTimer         = setmetatable({}, {__index = LibWorldEvents.Timer})
+LibWorldEvents.FlyTimer.__index = LibWorldEvents.FlyTimer
 
 -- @var number time The time in ms where update() which will be called
-LibDragonWorldEvent.FlyTimer.time = 1000
+LibWorldEvents.FlyTimer.time = 1000
 
 --[[
 -- Instanciate a new FlyTimer "object"
 --
 -- @param dragon The dragon which will use the FlyTimer
 --]]
-function LibDragonWorldEvent.FlyTimer:new(dragon)
+function LibWorldEvents.FlyTimer:new(dragon)
     local newFlyTimer = {
         dragon = dragon
     }
 
     newFlyTimer.name = string.format(
-        "LibDragonWorldEvent_FlyTimer_%d",
+        "LibWorldEvents_FlyTimer_%d",
         dragon.WEInstanceId
     )
 
@@ -30,7 +30,7 @@ end
 -- Called each 1sec in dragons zone.
 -- Check dragon position to know if dragon flying or has landed
 --]]
-function LibDragonWorldEvent.FlyTimer:update()
+function LibWorldEvents.FlyTimer:update()
     local timeSincePop = os.time() - self.dragon.fly.startTime
     local currentPos   = self.dragon:obtainPosition()
     local lastPos      = self.dragon.position
@@ -52,9 +52,9 @@ function LibDragonWorldEvent.FlyTimer:update()
 end
 
 --[[
--- Override LibDragonWorldEvent.Timer:disable() to sent the status "landed"
+-- Override LibWorldEvents.Timer:disable() to sent the status "landed"
 --]]
-function LibDragonWorldEvent.FlyTimer:disable()
-    LibDragonWorldEvent.Timer.disable(self)
+function LibWorldEvents.FlyTimer:disable()
+    LibWorldEvents.Timer.disable(self)
     self.dragon:onLanded()
 end

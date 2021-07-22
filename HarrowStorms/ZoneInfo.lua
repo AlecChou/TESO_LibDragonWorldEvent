@@ -1,12 +1,12 @@
-LibDragonWorldEvent.HarrowStorms.ZoneInfo = {}
+LibWorldEvents.HarrowStorms.ZoneInfo = {}
 
-LibDragonWorldEvent.HarrowStorms.ZoneInfo.onMap = false
+LibWorldEvents.HarrowStorms.ZoneInfo.onMap = false
 
-LibDragonWorldEvent.HarrowStorms.ZoneInfo.poiIcon = "/esoui/art/icons/poi/poi_portal_complete.dds"
+LibWorldEvents.HarrowStorms.ZoneInfo.poiIcon = "/esoui/art/icons/poi/poi_portal_complete.dds"
 
-LibDragonWorldEvent.HarrowStorms.ZoneInfo.isGenerated = false
+LibWorldEvents.HarrowStorms.ZoneInfo.isGenerated = false
 
-LibDragonWorldEvent.HarrowStorms.ZoneInfo.list = {
+LibWorldEvents.HarrowStorms.ZoneInfo.list = {
     { -- Western Skyrim
         zoneId = 1160,
         list   = {
@@ -78,7 +78,7 @@ LibDragonWorldEvent.HarrowStorms.ZoneInfo.list = {
     }
 }
 
-function LibDragonWorldEvent.HarrowStorms.ZoneInfo:generateList()
+function LibWorldEvents.HarrowStorms.ZoneInfo:generateList()
     for listIdx, zoneData in ipairs(self.list) do
         local zoneIdx = GetZoneIndex(zoneData.zoneId)
 
@@ -91,7 +91,7 @@ function LibDragonWorldEvent.HarrowStorms.ZoneInfo:generateList()
     self.isGenerated = true
 end
 
-function LibDragonWorldEvent.HarrowStorms.ZoneInfo:obtainList()
+function LibWorldEvents.HarrowStorms.ZoneInfo:obtainList()
     if self.isGenerated == false then
         self:generateList()
     end

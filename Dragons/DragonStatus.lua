@@ -1,7 +1,7 @@
-LibDragonWorldEvent.Dragons.DragonStatus = {}
+LibWorldEvents.Dragons.DragonStatus = {}
 
 -- @var table : List of all status which can be defined
-LibDragonWorldEvent.Dragons.DragonStatus.list = {
+LibWorldEvents.Dragons.DragonStatus.list = {
     unknown = "unknown",
     killed  = "killed",
     waiting = "waiting",
@@ -11,11 +11,11 @@ LibDragonWorldEvent.Dragons.DragonStatus.list = {
 }
 
 -- @var table : All map pin available and the corresponding status
-LibDragonWorldEvent.Dragons.DragonStatus.mapPinList = {
-    [MAP_PIN_TYPE_DRAGON_IDLE_HEALTHY]   = LibDragonWorldEvent.Dragons.DragonStatus.list.waiting,
-    [MAP_PIN_TYPE_DRAGON_IDLE_WEAK]      = LibDragonWorldEvent.Dragons.DragonStatus.list.waiting,
-    [MAP_PIN_TYPE_DRAGON_COMBAT_HEALTHY] = LibDragonWorldEvent.Dragons.DragonStatus.list.fight,
-    [MAP_PIN_TYPE_DRAGON_COMBAT_WEAK]    = LibDragonWorldEvent.Dragons.DragonStatus.list.weak,
+LibWorldEvents.Dragons.DragonStatus.mapPinList = {
+    [MAP_PIN_TYPE_DRAGON_IDLE_HEALTHY]   = LibWorldEvents.Dragons.DragonStatus.list.waiting,
+    [MAP_PIN_TYPE_DRAGON_IDLE_WEAK]      = LibWorldEvents.Dragons.DragonStatus.list.waiting,
+    [MAP_PIN_TYPE_DRAGON_COMBAT_HEALTHY] = LibWorldEvents.Dragons.DragonStatus.list.fight,
+    [MAP_PIN_TYPE_DRAGON_COMBAT_WEAK]    = LibWorldEvents.Dragons.DragonStatus.list.weak,
 }
 
 --[[
@@ -23,12 +23,12 @@ LibDragonWorldEvent.Dragons.DragonStatus.mapPinList = {
 --
 -- @param Dragon dragon : The dragon with the status to initialise
 --]]
-function LibDragonWorldEvent.Dragons.DragonStatus:initForDragon(dragon)
+function LibWorldEvents.Dragons.DragonStatus:initForDragon(dragon)
     local status = self:convertMapPin(dragon.unit.pin)
     dragon:resetWithStatus(status)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonStatus.initDragon,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonStatus.initDragon,
         self,
         dragon
     )
@@ -37,11 +37,11 @@ end
 --[[
 -- Check the status for all dragon instancied
 --]]
-function LibDragonWorldEvent.Dragons.DragonStatus:checkAllDragon()
-    LibDragonWorldEvent.Dragons.DragonList:execOnAll(self.checkForDragon)
+function LibWorldEvents.Dragons.DragonStatus:checkAllDragon()
+    LibWorldEvents.Dragons.DragonList:execOnAll(self.checkForDragon)
 
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonStatus.checkAll,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonStatus.checkAll,
         self
     )
 end
@@ -52,12 +52,12 @@ end
 --
 -- @param Dragon dragon The dragon to check
 --]]
-function LibDragonWorldEvent.Dragons.DragonStatus.checkForDragon(dragon)
+function LibWorldEvents.Dragons.DragonStatus.checkForDragon(dragon)
     dragon:updateUnit()
 
-    local realStatus    = LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin(dragon.unit.pin)
-    local waitingStatus = LibDragonWorldEvent.Dragons.DragonStatus.list.waiting
-    local flyingStatus  = LibDragonWorldEvent.Dragons.DragonStatus.list.flying
+    local realStatus    = LibWorldEvents.Dragons.DragonStatus:convertMapPin(dragon.unit.pin)
+    local waitingStatus = LibWorldEvents.Dragons.DragonStatus.list.waiting
+    local flyingStatus  = LibWorldEvents.Dragons.DragonStatus.list.flying
 
     if realStatus == waitingStatus and dragon.status.current == flyingStatus then
         realStatus = flyingStatus
@@ -67,9 +67,9 @@ function LibDragonWorldEvent.Dragons.DragonStatus.checkForDragon(dragon)
         dragon:resetWithStatus(realStatus)
     end
     
-    LibDragonWorldEvent.Events.callbackManager:FireCallbacks(
-        LibDragonWorldEvent.Events.callbackEvents.dragonStatus.check,
-        LibDragonWorldEvent.Dragons.DragonStatus,
+    LibWorldEvents.Events.callbackManager:FireCallbacks(
+        LibWorldEvents.Events.callbackEvents.dragonStatus.check,
+        LibWorldEvents.Dragons.DragonStatus,
         dragon
     )
 end
@@ -81,7 +81,7 @@ end
 --
 -- @return string
 --]]
-function LibDragonWorldEvent.Dragons.DragonStatus:convertMapPin(mapPin)
+function LibWorldEvents.Dragons.DragonStatus:convertMapPin(mapPin)
     local status = self.mapPinList[mapPin]
 
     if status == nil then

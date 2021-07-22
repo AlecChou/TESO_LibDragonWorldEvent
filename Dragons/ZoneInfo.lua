@@ -1,10 +1,10 @@
-LibDragonWorldEvent.Dragons.ZoneInfo = {}
+LibWorldEvents.Dragons.ZoneInfo = {}
 
-LibDragonWorldEvent.Dragons.ZoneInfo.onMap = false
+LibWorldEvents.Dragons.ZoneInfo.onMap = false
 
-LibDragonWorldEvent.Dragons.ZoneInfo.repopTime = 0
+LibWorldEvents.Dragons.ZoneInfo.repopTime = 0
 
-LibDragonWorldEvent.Dragons.ZoneInfo.list = {
+LibWorldEvents.Dragons.ZoneInfo.list = {
     { -- North Elsweyr
         zoneId = 1086,
         list   = {
@@ -49,6 +49,6 @@ LibDragonWorldEvent.Dragons.ZoneInfo.list = {
     }
 }
 
-function LibDragonWorldEvent.Dragons.ZoneInfo:obtainList()
+function LibWorldEvents.Dragons.ZoneInfo:obtainList()
     return self.list
 end

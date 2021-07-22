@@ -5,6 +5,9 @@ ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH",      "Nord")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH",      "Sud")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_EAST", "Sud-Est")
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_WEST", "Sud-Ouest")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_WEST",       "Ouest")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_EAST",       "Est")
+ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_CP_CENTER",     "Centre")
 
 -- Location names
 ZO_CreateStringId("SI_LIB_DRAGON_WORLD_EVENT_LN_PROWLS_EDGE", "Bord de Traque") -- North

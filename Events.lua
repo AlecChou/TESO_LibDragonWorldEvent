@@ -78,7 +78,6 @@ function LibWorldEvents.Events.onLoadScreen(eventCode, initial)
     end
 
     LibWorldEvents.Zone:updateInfo()
-    LibWorldEvents.Zone:initWorldEvent()
 end
 
 --[[

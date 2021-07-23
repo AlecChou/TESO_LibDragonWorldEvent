@@ -29,13 +29,14 @@ LibWorldEvents.Zone.info         = nil
 function LibWorldEvents.Zone:updateInfo()
     local currentZoneId = GetZoneId(GetCurrentMapZoneIndex())
 
-    self:checkWorldEvent(currentZoneId)
-
     self.changedZone = false
     if self.lastZoneId ~= currentZoneId then
         self.changedZone = true
         self.lastZoneId  = currentZoneId
     end
+
+    self:checkWorldEvent(currentZoneId)
+    self:initWorldEvent()
 
     LibWorldEvents.Events.callbackManager:FireCallbacks(
         LibWorldEvents.Events.callbackEvents.zone.updateInfo,
@@ -47,6 +48,9 @@ function LibWorldEvents.Zone:resetZoneData()
     self.info              = nil
     self.onWorldEventMap   = false
     self.worldEventMapType = nil
+
+    LibWorldEvents.Dragons.ZoneInfo.onMap      = false
+    LibWorldEvents.HarrowStorms.ZoneInfo.onMap = false
 end
 
 --[[
@@ -94,9 +98,6 @@ function LibWorldEvents.Zone:initWorldEvent()
     if self.onWorldEventMap == false then
         return
     end
-
-    LibWorldEvents.Dragons.ZoneInfo.onMap      = false
-    LibWorldEvents.HarrowStorms.ZoneInfo.onMap = false
 
     if self.worldEventMapType == self.WORLD_EVENT_TYPE.DRAGON then
         LibWorldEvents.Dragons.ZoneInfo.onMap = true

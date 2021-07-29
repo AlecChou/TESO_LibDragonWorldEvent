@@ -6,8 +6,9 @@ LibWorldEvents.Dragons.ZoneInfo.repopTime = 0
 
 LibWorldEvents.Dragons.ZoneInfo.list = {
     { -- North Elsweyr
-        zoneId = 1086,
-        list   = {
+        zoneId  = 1086,
+        mapName = "elsweyr/elsweyr_base",
+        list    = {
             title = {
                 cp = {
                     [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
@@ -28,8 +29,9 @@ LibWorldEvents.Dragons.ZoneInfo.list = {
         },
     },
     { -- South Elsweyr
-        zoneId = 1133,
-        list   = {
+        zoneId  = 1133,
+        mapName = "southernelsweyr/southernelsweyr_base",
+        list    = {
             title = {
                 cp = {
                     [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),

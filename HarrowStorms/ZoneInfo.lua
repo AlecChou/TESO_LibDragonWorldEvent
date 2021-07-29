@@ -8,8 +8,9 @@ LibWorldEvents.HarrowStorms.ZoneInfo.isGenerated = false
 
 LibWorldEvents.HarrowStorms.ZoneInfo.list = {
     { -- Western Skyrim
-        zoneId = 1160,
-        list   = {
+        zoneId  = 1160,
+        mapName = "skyrim/westernskryim_base",
+        list    = {
             title = {
                 cp = {
                     [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
@@ -32,8 +33,9 @@ LibWorldEvents.HarrowStorms.ZoneInfo.list = {
         },
     },
     { -- Blackreach: Greymoor caverns
-        zoneId = 1161,
-        list   = {
+        zoneId  = 1161,
+        mapName = "skyrim/blackreach_base",
+        list    = {
             title = {
                 cp = {
                     [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_WEST),
@@ -52,8 +54,9 @@ LibWorldEvents.HarrowStorms.ZoneInfo.list = {
         },
     },
     { -- The Reach
-        zoneId = 1207,
-        list   = {
+        zoneId  = 1207,
+        mapName = "reach/reach_base",
+        list    = {
             title = {
                 cp = {
                     [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),

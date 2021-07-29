@@ -17,6 +17,8 @@ function LibWorldEvents.Dragons.DragonList:reset()
     self.nb                    = 0
     self.WEInstanceIdToListIdx = {}
 
+    LibWorldEvents.Dragons.ZoneInfo.repopTime = 0
+
     LibWorldEvents.Events.callbackManager:FireCallbacks(
         LibWorldEvents.Events.callbackEvents.dragonList.reset,
         self

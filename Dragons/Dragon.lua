@@ -11,7 +11,8 @@ LibWorldEvents.Dragons.Dragon.__index = LibWorldEvents.Dragons.Dragon
 --]]
 function LibWorldEvents.Dragons.Dragon:new(dragonIdx, WEInstanceId)
     local newDragon = {
-        dragonIdx    = dragonIdx,
+        eventType    = LibWorldEvents.Zone.worldEventMapType,
+        eventIdx     = dragonIdx,
         WEInstanceId = WEInstanceId,
         WEId         = nil,
         title        = {

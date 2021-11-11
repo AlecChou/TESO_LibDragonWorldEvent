@@ -1,6 +1,6 @@
 ## Title: LibWorldEvents
 ## Description: Lib to know World Events info
-## Version: 2.0.2
+## Version: 2.1
 ## Author: bulton-fr
 ## APIVersion: 100035
 ## IsLibrary: true

@@ -2,12 +2,18 @@
 
 -- Cardinal points
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH",        "Nord")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH_EAST",   "Nord-Est")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH_CENTER", "Nord-Centre")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH_WEST",   "Nord-Ouest")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH",        "Sud")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_EAST",   "Sud-Est")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_CENTER", "Sud-Centre")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_WEST",   "Sud-Ouest")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_WEST",         "Ouest")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_EAST",         "Est")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER",       "Centre")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_EAST",  "Centre-Est")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_WEST",  "Centre-Ouest")
 
 -- Location names
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_PROWLS_EDGE", "Bord de Traque") -- North
@@ -21,6 +27,10 @@ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_UNKNOWN", "Inconnu")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_WAITING", "En attente")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_FLYING",  "En vol")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_WEAK",    "En combat (santé < 50%)")
+
+-- POI status
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_STARTED", "Commencé")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_STATUS_ENDED",   "Terminé")
 
 -- Dragon color
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_DRAGON_COLOR_RED",   "dragon rouge")

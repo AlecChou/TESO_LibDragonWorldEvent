@@ -11,14 +11,14 @@ LibWorldEvents.Dragons.ZoneInfo.list = {
         list    = {
             title = {
                 cp = {
-                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
-                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_EAST),
-                    [3] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH_WEST)
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH),
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_EAST),
+                    [3] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_WEST)
                 },
                 ln = {
-                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_PROWLS_EDGE),
-                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_SANDBLOWN),
-                    [3] = GetString(SI_LIB_DRAGON_WORLD_EVENT_LN_SCAB_RIDGE)
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_LN_PROWLS_EDGE),
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_LN_SANDBLOWN),
+                    [3] = GetString(SI_LIB_WORLD_EVENTS_LN_SCAB_RIDGE)
                 }
             },
             WEInstanceId = {
@@ -34,13 +34,13 @@ LibWorldEvents.Dragons.ZoneInfo.list = {
         list    = {
             title = {
                 cp = {
-                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
-                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH)
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH),
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH)
                 },
                 ln = {
                     --Not an copy/paste error, the in game name are really north/south
-                    [1] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_NORTH),
-                    [2] = GetString(SI_LIB_DRAGON_WORLD_EVENT_CP_SOUTH)
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH),
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH)
                 },
             },
             WEInstanceId = {

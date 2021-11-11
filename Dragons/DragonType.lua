@@ -2,25 +2,25 @@ LibWorldEvents.Dragons.DragonType = {}
 
 LibWorldEvents.Dragons.DragonType.list = {
     [1] = {
-        colorTxt = GetString(SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_RED),
+        colorTxt = GetString(SI_LIB_WORLD_EVENTS_DRAGON_COLOR_RED),
         colorRGB  = {r=1, g=0, b=0},
         abilityId = 122559,
         maxHP     = 14713494
     },
     [2] = {
-        colorTxt  = GetString(SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_GREY),
+        colorTxt  = GetString(SI_LIB_WORLD_EVENTS_DRAGON_COLOR_GREY),
         colorRGB  = {r=0.48235, g=0.47059, b=0.45098},
         abilityId = 122559,
         maxHP     = 16184844
     },
     [3] = {
-        colorTxt  = GetString(SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_BLACK),
+        colorTxt  = GetString(SI_LIB_WORLD_EVENTS_DRAGON_COLOR_BLACK),
         colorRGB  = {r=0, g=0, b=0},
         abilityId = 122562,
         maxHP     = 14713494
     },
     [4] = {
-        colorTxt  = GetString(SI_LIB_DRAGON_WORLD_EVENT_DRAGON_COLOR_WHITE),
+        colorTxt  = GetString(SI_LIB_WORLD_EVENTS_DRAGON_COLOR_WHITE),
         colorRGB  = {r=1, g=1, b=1},
         abilityId = 122561,
         maxHP     = 14713494

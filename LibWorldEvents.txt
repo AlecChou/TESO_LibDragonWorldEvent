@@ -14,10 +14,12 @@ Dragons/DragonList.lua
 Dragons/DragonStatus.lua
 Dragons/DragonType.lua
 Dragons/ZoneInfo.lua
-HarrowStorms/HarrowStorm.lua
-HarrowStorms/HarrowStormList.lua
-HarrowStorms/HarrowStormStatus.lua
-HarrowStorms/ZoneInfo.lua
+POI/POI.lua
+POI/POIList.lua
+POI/POIStatus.lua
+POI/Dolmen.lua
+POI/Geyser.lua
+POI/HarrowStorms.lua
 Events.lua
 Timer.lua
 FlyTimer.lua

@@ -4,8 +4,8 @@ LibWorldEvents.name  = "LibWorldEvents"
 LibWorldEvents.ready = false
 
 -- Define sub-directory namespaces
-LibWorldEvents.Dragons      = {}
-LibWorldEvents.HarrowStorms = {}
+LibWorldEvents.Dragons = {}
+LibWorldEvents.POI     = {}
 
 --[[
 -- Module initialiser

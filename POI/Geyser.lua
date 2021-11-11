@@ -6,7 +6,7 @@ LibWorldEvents.POI.Geyser.onMap = false
 -- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.Geyser.isGenerated = false
 
--- List of all zone with geyser world events
+-- @var table List of all zone with geyser world events
 LibWorldEvents.POI.Geyser.list = {
     { -- Le couchant / Summerset
         zoneId  = 1011,

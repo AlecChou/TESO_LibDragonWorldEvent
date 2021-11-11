@@ -127,7 +127,7 @@ function LibWorldEvents.Dragons.Dragon:updatePosition(position)
 end
 
 --[[
--- Obtain and return the current dragonn position
+-- Obtain and return the current dragon position
 --
 -- @return table
 --]]

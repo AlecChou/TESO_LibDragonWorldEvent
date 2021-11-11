@@ -6,7 +6,7 @@ LibWorldEvents.POI.Dolmen.onMap = false
 -- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.Dolmen.isGenerated = false
 
--- List of all zone with dolmen world events
+-- @var table List of all zone with dolmen world events
 LibWorldEvents.POI.Dolmen.list = {
     { -- Glénumerie / Glénumbra
         zoneId  = 3,

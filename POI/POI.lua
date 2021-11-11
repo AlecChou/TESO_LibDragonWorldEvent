@@ -126,7 +126,7 @@ function LibWorldEvents.POI.POI:execStatusFunction()
 end
 
 --[[
--- Called when the poi (re)pop
+-- Called when the poi (re)start
 --]]
 function LibWorldEvents.POI.POI:started()
     -- @TODO : repopTime

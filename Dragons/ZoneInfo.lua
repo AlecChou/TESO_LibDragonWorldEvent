@@ -7,7 +7,7 @@ LibWorldEvents.Dragons.ZoneInfo.onMap = false
 -- Need to see a kill/repop to get the value
 LibWorldEvents.Dragons.ZoneInfo.repopTime = 0
 
--- List of all zone with dragons world events
+-- @var table List of all zone with dragons world events
 LibWorldEvents.Dragons.ZoneInfo.list = {
     { -- North Elsweyr
         zoneId  = 1086,

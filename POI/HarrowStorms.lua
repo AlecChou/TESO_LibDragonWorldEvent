@@ -6,7 +6,7 @@ LibWorldEvents.POI.HarrowStorms.onMap = false
 -- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.HarrowStorms.isGenerated = false
 
--- List of all zone with harrowStorms world events
+-- @var table List of all zone with harrowStorms world events
 LibWorldEvents.POI.HarrowStorms.list = {
     { -- Western Skyrim
         zoneId  = 1160,

@@ -81,10 +81,10 @@ function LibWorldEvents.Events.onLoadScreen(eventCode, initial)
 end
 
 --[[
--- Called when a World Event start (aka dragon pop).
+-- Called when a World Event start (aka dragon pop or dolmen will start).
 --
 -- @param number eventCode
--- @param number worldEventInstanceId The concerned world event (aka dragon).
+-- @param number worldEventInstanceId The worldEventID of the dragon or POI.
 --]]
 function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
     if LibWorldEvents.ready == false then
@@ -109,7 +109,7 @@ function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
         -- d("WEACtivate for poi")
 
         local _, poiIdx = GetWorldEventPOIInfo(worldEventInstanceId)
-        LibWorldEvents.POI.POIList:updateWEInstanceId(poiIdx)
+        LibWorldEvents.POI.POIList:updateActiveWEIndex(poiIdx)
         local poi = LibWorldEvents.POI.POIList:obtainForPoiIdx(poiIdx)
 
         if poi == nil then
@@ -125,7 +125,7 @@ end
 -- Called when a World Event is finished (aka dragon killed).
 --
 -- @param number eventCode
--- @param number worldEventInstanceId The concerned world event (aka dragon).
+-- @param number worldEventInstanceId The worldEventID of the dragon or POI.
 --]]
 function LibWorldEvents.Events.onWEDeactivate(eventCode, worldEventInstanceId)
     if LibWorldEvents.ready == false then
@@ -157,6 +157,7 @@ end
 
 --[[
 -- Called when a World Event has this map pin changed (aka new dragon or dragon in fight).
+-- Not used (also maybe called) for POI
 --
 -- @param number eventCode
 -- @param number worldEventInstanceId The concerned world event (aka dragon).
@@ -189,6 +190,7 @@ end
 
 --[[
 -- Called when a World Event change location
+-- Dragons only
 --
 -- @param number eventCode
 -- @param number worldEventInstanceId The concerned world event (aka dragon).

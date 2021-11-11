@@ -1,9 +1,12 @@
 LibWorldEvents.POI.Dolmen = {}
 
+-- @var bool onMap To know if the user is on a map where dolmens world event can happen
 LibWorldEvents.POI.Dolmen.onMap = false
 
+-- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.Dolmen.isGenerated = false
 
+-- List of all zone with dolmen world events
 LibWorldEvents.POI.Dolmen.list = {
     { -- Glénumerie / Glénumbra
         zoneId  = 3,
@@ -292,6 +295,10 @@ LibWorldEvents.POI.Dolmen.list = {
     }
 }
 
+--[[
+-- Obtain and add the location name of all POI to the list
+-- To always have a updated value for the current language, I prefer to not save it myself
+--]]
 function LibWorldEvents.POI.Dolmen:generateList()
     for listIdx, zoneData in ipairs(self.list) do
         for poiListIdx, poiId in ipairs(zoneData.list.poiIDs) do
@@ -304,6 +311,9 @@ function LibWorldEvents.POI.Dolmen:generateList()
     self.isGenerated = true
 end
 
+--[[
+-- To obtain the zone's list where a dolmen world event can happen
+--]]
 function LibWorldEvents.POI.Dolmen:obtainList()
     if self.isGenerated == false then
         self:generateList()

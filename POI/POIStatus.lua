@@ -49,6 +49,11 @@ function LibWorldEvents.POI.POIStatus.checkForPOI(poi)
     )
 end
 
+--[[
+-- Check and update the status for a specific poi
+--
+-- @param POI poi The poi instance to update
+--]]
 function LibWorldEvents.POI.POIStatus:update(poi)
     poi:updateWEInstanceId()
 

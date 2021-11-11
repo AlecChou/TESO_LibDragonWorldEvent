@@ -1,16 +1,18 @@
 LibWorldEvents.Zone = {}
 
+-- @var table All managed world event type
 LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
-    DRAGON = "dragon",
+    DRAGON      = "dragon",
     HARROWSTORM = "harrowstorm",
-    GEYSER = "geyser",
-    DOLMEN = "dolmen",
+    GEYSER      = "geyser",
+    DOLMEN      = "dolmen",
     -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged yet
 }
 
 -- @var boolean If player is on a map with world events
 LibWorldEvents.Zone.onWorldEventMap = false
 
+-- @var nil|string The current world event type on the map
 LibWorldEvents.Zone.worldEventMapType = nil
 
 -- @var nil|number The previous ZoneId
@@ -43,6 +45,9 @@ function LibWorldEvents.Zone:updateInfo()
     )
 end
 
+--[[
+-- Reset all properties about the world event on the current map
+--]]
 function LibWorldEvents.Zone:resetZoneData()
     self.info              = nil
     self.onWorldEventMap   = false
@@ -55,7 +60,7 @@ function LibWorldEvents.Zone:resetZoneData()
 end
 
 --[[
--- Check if it's a zone with dragons.
+-- Check if it's a zone with managed world events.
 --
 -- @param number currentZoneId The current zone id
 --]]
@@ -83,6 +88,14 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     )
 end
 
+--[[
+-- Check if a specific world event type exist on the current zone
+--
+-- @param number currentZoneId
+-- @param string weType The type of world event check (cf self.WORLD_EVENT_TYPE table)
+-- @param table zoneList The list of zone where the check world event exist
+    (cf Dragons.ZoneList.list, POI.(Dolmen|Geyser|HarrowStorms).list)
+--]]
 function LibWorldEvents.Zone:checkWorldEventForType(currentZoneId, weType, zoneList)
     if self.onWorldEventMap == true then
         return
@@ -98,6 +111,12 @@ function LibWorldEvents.Zone:checkWorldEventForType(currentZoneId, weType, zoneL
     end
 end
 
+--[[
+-- Initialise the system for the current type of world event
+-- * Define the "onMap" property for the world event type table
+-- * Update the list for the world event type
+-- * Call the check of status for all world event available on the map
+--]]
 function LibWorldEvents.Zone:initWorldEvent()
     if self.onWorldEventMap == false then
         return

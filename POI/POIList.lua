@@ -1,23 +1,25 @@
 LibWorldEvents.POI.POIList = {}
 
--- @var table List of all dragons instancied
+-- @var table List of all poi instancied
 LibWorldEvents.POI.POIList.list = {}
 
 -- @var number Number of item in list
 LibWorldEvents.POI.POIList.nb   = 0
 
+-- @var table Map between (key) the poi index on the eso poi list and (value) index in self.list
 LibWorldEvents.POI.POIList.poiIdxMap = {}
 
-LibWorldEvents.POI.POIList.currentWEInstanceIdListIdx = 0
+-- @var number The index in self.list for the current world event enabled on the zone
+LibWorldEvents.POI.POIList.currentWEListIdx = 0
 
 --[[
 -- Reset the list
 --]]
 function LibWorldEvents.POI.POIList:reset()
-    self.list                       = {}
-    self.poiIdxMap                  = {}
-    self.nb                         = 0
-    self.currentWEInstanceIdListIdx = 0
+    self.list             = {}
+    self.poiIdxMap        = {}
+    self.nb               = 0
+    self.currentWEListIdx = 0
 
     LibWorldEvents.Events.callbackManager:FireCallbacks(
         LibWorldEvents.Events.callbackEvents.poiList.reset,
@@ -61,29 +63,38 @@ function LibWorldEvents.POI.POIList:execOnAll(callback)
 end
 
 --[[
--- Obtain the poi instance for a WEInstanceId
+-- Obtain the poi instance for the last active world event
 --
 -- @return POI
 --]]
 function LibWorldEvents.POI.POIList:obtainLastActive()
-    local poiIdx = self.currentWEInstanceIdListIdx
+    local poiIdx = self.currentWEListIdx
 
     return self.list[poiIdx]
 end
 
-function LibWorldEvents.POI.POIList:updateWEInstanceId(poiIdx)
+--[[
+-- Update the active world event index from a poi index
+-- Called when a POI world event start
+--]]
+function LibWorldEvents.POI.POIList:updateActiveWEIndex(poiIdx)
     for listIdx, poi in ipairs(self.list) do
         if poi.poi.poiIdx == poiIdx then
-            self.currentWEInstanceIdListIdx = listIdx
+            self.currentWEListIdx = listIdx
             return
         end
     end
 end
 
+--[[
+-- Obtain the poi instance for a poi index (in eso game poi list)
+--
+-- @return nil|POI
+--]]
 function LibWorldEvents.POI.POIList:obtainForPoiIdx(poiIdx)
-    local poi = self.poiIdxMap[poiIdx]
+    local poiListIdx = self.poiIdxMap[poiIdx]
 
-    return self.list[poi]
+    return self.list[poiListIdx]
 end
 
 --[[
@@ -105,7 +116,7 @@ function LibWorldEvents.POI.POIList:update()
 end
 
 --[[
--- Remove all dragon instance in the list and reset GUI items list
+-- Remove all poi instance in the list and reset GUI items list
 --]]
 function LibWorldEvents.POI.POIList:removeAll()
     self:reset()

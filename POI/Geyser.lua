@@ -1,9 +1,12 @@
 LibWorldEvents.POI.Geyser = {}
 
+-- @var bool onMap To know if the user is on a map where geyser world event can happen
 LibWorldEvents.POI.Geyser.onMap = false
 
+-- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.Geyser.isGenerated = false
 
+-- List of all zone with geyser world events
 LibWorldEvents.POI.Geyser.list = {
     { -- Le couchant / Summerset
         zoneId  = 1011,
@@ -32,6 +35,10 @@ LibWorldEvents.POI.Geyser.list = {
     }
 }
 
+--[[
+-- Obtain and add the location name of all POI to the list
+-- To always have a updated value for the current language, I prefer to not save it myself
+--]]
 function LibWorldEvents.POI.Geyser:generateList()
     for listIdx, zoneData in ipairs(self.list) do
         local zoneIdx = GetZoneIndex(zoneData.zoneId)
@@ -45,6 +52,9 @@ function LibWorldEvents.POI.Geyser:generateList()
     self.isGenerated = true
 end
 
+--[[
+-- To obtain the zone's list where a geyser world event can happen
+--]]
 function LibWorldEvents.POI.Geyser:obtainList()
     if self.isGenerated == false then
         self:generateList()

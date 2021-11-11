@@ -4,10 +4,9 @@ LibWorldEvents.POI.POI.__index = LibWorldEvents.POI.POI
 --[[
 -- Instanciate a new POI "object"
 --
--- @param number poiIdx The poi index in POIList.list
--- @param number WEInstanceId The dragon's WorldEventInstanceId
+-- @param number poiListIdx The poi index in POIList.list
 --
--- @return Dragon
+-- @return POI
 --]]
 function LibWorldEvents.POI.POI:new(poiListIdx)
     local zoneIdx, poiIdx = GetPOIIndices(
@@ -34,7 +33,7 @@ function LibWorldEvents.POI.POI:new(poiListIdx)
         },
         repop        = {
             endTime  = 0,
-            -- repopTime = 0,
+            -- repopTime = 0, --@TODO
         },
     }
 
@@ -53,19 +52,21 @@ end
 
 --[[
 -- Update the WorldEventId
+-- Seem to be a not used method for POI, who comes from a Dragon copy/paste
+-- @TODO Check if useless or not
 --]]
 function LibWorldEvents.POI.POI:updateWEId()
     self.WEId = GetWorldEventId(self.WEInstanceId)
 end
 
 --[[
--- Update the WorldEventId
+-- Update the WorldEventInstanceId
 --]]
 function LibWorldEvents.POI.POI:updateWEInstanceId()
     self.WEInstanceId = GetPOIWorldEventInstanceId(self.poi.zoneIdx, self.poi.poiIdx)
 
-    if self.WEInstanceId ~= 0 and LibWorldEvents.POI.POIList.currentWEInstanceIdListIdx == 0 then
-        LibWorldEvents.POI.POIList.currentWEInstanceIdListIdx = self.eventIdx
+    if self.WEInstanceId ~= 0 and LibWorldEvents.POI.POIList.currentWEListIdx == 0 then
+        LibWorldEvents.POI.POIList.currentWEListIdx = self.eventIdx
     end
 end
 

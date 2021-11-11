@@ -62,6 +62,8 @@ end
 --[[
 -- Obtain the dragon instance for a WEInstanceId
 --
+-- @param number WEInstanceId
+--
 -- @return Dragon
 --]]
 function LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(WEInstanceId)

@@ -1,9 +1,12 @@
 LibWorldEvents.POI.HarrowStorms = {}
 
+-- @var bool onMap To know if the user is on a map where harrowStorms world event can happen
 LibWorldEvents.POI.HarrowStorms.onMap = false
 
+-- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.HarrowStorms.isGenerated = false
 
+-- List of all zone with harrowStorms world events
 LibWorldEvents.POI.HarrowStorms.list = {
     { -- Western Skyrim
         zoneId  = 1160,
@@ -79,6 +82,10 @@ LibWorldEvents.POI.HarrowStorms.list = {
     }
 }
 
+--[[
+-- Obtain and add the location name of all POI to the list
+-- To always have a updated value for the current language, I prefer to not save it myself
+--]]
 function LibWorldEvents.POI.HarrowStorms:generateList()
     for listIdx, zoneData in ipairs(self.list) do
         local zoneIdx = GetZoneIndex(zoneData.zoneId)
@@ -92,6 +99,9 @@ function LibWorldEvents.POI.HarrowStorms:generateList()
     self.isGenerated = true
 end
 
+--[[
+-- To obtain the zone's list where a harrowStorms world event can happen
+--]]
 function LibWorldEvents.POI.HarrowStorms:obtainList()
     if self.isGenerated == false then
         self:generateList()

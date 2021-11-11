@@ -1,5 +1,6 @@
 LibWorldEvents.Dragons.DragonType = {}
 
+-- @var table list The list of all existing dragons in Elsweyr, with data to identify them
 LibWorldEvents.Dragons.DragonType.list = {
     [1] = {
         colorTxt = GetString(SI_LIB_WORLD_EVENTS_DRAGON_COLOR_RED),

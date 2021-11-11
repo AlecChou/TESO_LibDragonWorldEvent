@@ -3,13 +3,12 @@ LibWorldEvents.Zone = {}
 LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
     DRAGON = "dragon",
     HARROWSTORM = "harrowstorm",
-
-    --Not plugged in game yet
-    -- DOLMEN = "dolmen",
-    -- OBLIVON_PORTAL = "oblivon portal"
+    GEYSER = "geyser",
+    DOLMEN = "dolmen",
+    -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged yet
 }
 
--- @var boolean If player is on a map with dragon
+-- @var boolean If player is on a map with world events
 LibWorldEvents.Zone.onWorldEventMap = false
 
 LibWorldEvents.Zone.worldEventMapType = nil
@@ -49,8 +48,10 @@ function LibWorldEvents.Zone:resetZoneData()
     self.onWorldEventMap   = false
     self.worldEventMapType = nil
 
-    LibWorldEvents.Dragons.ZoneInfo.onMap      = false
-    LibWorldEvents.HarrowStorms.ZoneInfo.onMap = false
+    LibWorldEvents.Dragons.ZoneInfo.onMap = false
+    LibWorldEvents.POI.HarrowStorms.onMap = false
+    LibWorldEvents.POI.Geyser.onMap       = false
+    LibWorldEvents.POI.Dolmen.onMap       = false
 end
 
 --[[
@@ -62,11 +63,14 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     self:resetZoneData()
 
     local dragonsZoneList     = LibWorldEvents.Dragons.ZoneInfo:obtainList()
-    local harrowstormZoneList = LibWorldEvents.HarrowStorms.ZoneInfo:obtainList()
-    -- local dolmenMapList      = LibWorldEvents.Dolmens.ZoneInfo:obtainList() --Not plugged in game yet
+    local harrowstormZoneList = LibWorldEvents.POI.HarrowStorms:obtainList()
+    local geyserZoneList      = LibWorldEvents.POI.Geyser:obtainList()
+    local dolmenZoneList      = LibWorldEvents.POI.Dolmen:obtainList()
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.HARROWSTORM, harrowstormZoneList)
+    self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.GEYSER, geyserZoneList)
+    self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DOLMEN, dolmenZoneList)
 
     -- If we are in a dungeon/delve/battleground or in an house : no world event.
     if IsUnitInDungeon("player") or GetCurrentZoneHouseId() ~= 0 then
@@ -104,10 +108,19 @@ function LibWorldEvents.Zone:initWorldEvent()
 
         LibWorldEvents.Dragons.DragonList:update()
         LibWorldEvents.Dragons.DragonStatus:checkAllDragon()
-    elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.HARROWSTORM then
-        LibWorldEvents.HarrowStorms.ZoneInfo.onMap = true
+    else
+        if self.worldEventMapType == self.WORLD_EVENT_TYPE.HARROWSTORM then
+            LibWorldEvents.POI.HarrowStorms.onMap = true
+        elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.GEYSER then
+            LibWorldEvents.POI.Geyser.onMap = true
+        elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.DOLMEN then
+            LibWorldEvents.POI.Dolmen.onMap = true
+        else
+            -- d("unknown event")
+            return
+        end
 
-        LibWorldEvents.HarrowStorms.HarrowStormList:update()
-        LibWorldEvents.HarrowStorms.HarrowStormStatus:checkAllHarrowStorm()
+        LibWorldEvents.POI.POIList:update()
+        LibWorldEvents.POI.POIStatus:checkAllPOI()
     end
 end

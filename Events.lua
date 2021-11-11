@@ -91,6 +91,8 @@ function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
         return
     end
 
+    -- d(zo_strformat("New woldEvent #<<1>>", worldEventInstanceId))
+
     if LibWorldEvents.Dragons.ZoneInfo.onMap == true then
         local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
 
@@ -99,16 +101,23 @@ function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
         end
 
         dragon:poped()
-    elseif LibWorldEvents.HarrowStorms.ZoneInfo.onMap == true then
-        local _, poiIdx = GetWorldEventPOIInfo(worldEventInstanceId)
-        LibWorldEvents.HarrowStorms.HarrowStormList:updateWEInstanceId(poiIdx)
-        local harrowStorm = LibWorldEvents.HarrowStorms.HarrowStormList:obtainForPoiIdx(poiIdx)
+    elseif
+        LibWorldEvents.POI.HarrowStorms.onMap == true or
+        LibWorldEvents.POI.Geyser.onMap == true or
+        LibWorldEvents.POI.Dolmen.onMap == true
+    then
+        -- d("WEACtivate for poi")
 
-        if harrowStorm == nil then
+        local _, poiIdx = GetWorldEventPOIInfo(worldEventInstanceId)
+        LibWorldEvents.POI.POIList:updateWEInstanceId(poiIdx)
+        local poi = LibWorldEvents.POI.POIList:obtainForPoiIdx(poiIdx)
+
+        if poi == nil then
+            -- d("unknown poi from worldEventInstanceID")
             return
         end
 
-        harrowStorm:changeStatus(LibWorldEvents.HarrowStorms.HarrowStormStatus.list.started)
+        poi:changeStatus(LibWorldEvents.POI.POIStatus.list.started)
     end
 end
 
@@ -131,15 +140,18 @@ function LibWorldEvents.Events.onWEDeactivate(eventCode, worldEventInstanceId)
         end
 
         dragon:changeStatus(LibWorldEvents.Dragons.DragonStatus.list.killed)
-    elseif LibWorldEvents.HarrowStorms.ZoneInfo.onMap == true then
-        local harrowStorm = LibWorldEvents.HarrowStorms.HarrowStormList:obtainLastActive()
+    elseif
+        LibWorldEvents.POI.HarrowStorms.onMap == true or
+        LibWorldEvents.POI.Geyser.onMap == true or
+        LibWorldEvents.POI.Dolmen.onMap == true
+    then
+        local poi = LibWorldEvents.POI.POIList:obtainLastActive()
 
-        if harrowStorm == nil then
+        if poi == nil then
             return
         end
 
-        harrowStorm:changeStatus(LibWorldEvents.HarrowStorms.HarrowStormStatus.list.ended)
-        harrowStorm:ended()
+        poi:changeStatus(LibWorldEvents.POI.POIStatus.list.ended)
     end
 end
 

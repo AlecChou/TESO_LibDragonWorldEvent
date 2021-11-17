@@ -88,10 +88,9 @@ LibWorldEvents.POI.HarrowStorms.list = {
 --]]
 function LibWorldEvents.POI.HarrowStorms:generateList()
     for listIdx, zoneData in ipairs(self.list) do
-        local zoneIdx = GetZoneIndex(zoneData.zoneId)
-
-        for poiListIdx, poiIdx in ipairs(zoneData.list.poiIDs) do
-            local poiTitle = GetPOIInfo(zoneIdx, poiIdx)
+        for poiListIdx, poiId in ipairs(zoneData.list.poiIDs) do
+            local zoneIdx, poiIdx = GetPOIIndices(poiId)
+            local poiTitle        = GetPOIInfo(zoneIdx, poiIdx)
             zoneData.list.title.ln[poiListIdx] = zo_strformat(poiTitle)
         end
     end

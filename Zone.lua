@@ -28,7 +28,7 @@ LibWorldEvents.Zone.info         = nil
 -- Update info about the current zone.
 --]]
 function LibWorldEvents.Zone:updateInfo()
-    local currentZoneId = GetZoneId(GetCurrentMapZoneIndex())
+    local currentZoneId = GetZoneId(GetUnitZoneIndex("player"))
 
     self.changedZone = false
     if self.lastZoneId ~= currentZoneId then

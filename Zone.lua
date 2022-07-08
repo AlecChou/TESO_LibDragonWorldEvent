@@ -6,6 +6,7 @@ LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
     HARROWSTORM = "harrowstorm",
     GEYSER      = "geyser",
     DOLMEN      = "dolmen",
+    VOLCANIC_VENT = "volcanicvent",
     -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged yet
 }
 
@@ -57,6 +58,7 @@ function LibWorldEvents.Zone:resetZoneData()
     LibWorldEvents.POI.HarrowStorms.onMap = false
     LibWorldEvents.POI.Geyser.onMap       = false
     LibWorldEvents.POI.Dolmen.onMap       = false
+    LibWorldEvents.POI.VolcanicVent.onMap = false
 end
 
 --[[
@@ -71,11 +73,13 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     local harrowstormZoneList = LibWorldEvents.POI.HarrowStorms:obtainList()
     local geyserZoneList      = LibWorldEvents.POI.Geyser:obtainList()
     local dolmenZoneList      = LibWorldEvents.POI.Dolmen:obtainList()
+    local volcanicVentZoneList = LibWorldEvents.POI.VolcanicVent:obtainList()
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.HARROWSTORM, harrowstormZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.GEYSER, geyserZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DOLMEN, dolmenZoneList)
+    self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.VOLCANIC_VENT, volcanicVentZoneList)
 
     -- If we are in a dungeon/delve/battleground or in an house : no world event.
     if IsUnitInDungeon("player") or GetCurrentZoneHouseId() ~= 0 then
@@ -134,12 +138,14 @@ function LibWorldEvents.Zone:initWorldEvent()
             LibWorldEvents.POI.Geyser.onMap = true
         elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.DOLMEN then
             LibWorldEvents.POI.Dolmen.onMap = true
+        elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.VOLCANIC_VENT then
+            LibWorldEvents.POI.VolcanicVent.onMap = true
         else
             -- d("unknown event")
             return
         end
 
-        LibWorldEvents.POI.POIList:update()
+            LibWorldEvents.POI.POIList:update()
         LibWorldEvents.POI.POIStatus:checkAllPOI()
     end
 end

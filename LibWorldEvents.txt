@@ -2,7 +2,7 @@
 ## Description: Lib to know World Events info
 ## Version: 2.1.1
 ## Author: bulton-fr
-## APIVersion: 101032
+## APIVersion: 101034
 ## IsLibrary: true
 
 lang\en.lua

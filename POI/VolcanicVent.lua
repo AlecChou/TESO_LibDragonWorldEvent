@@ -40,7 +40,7 @@ function LibWorldEvents.POI.VolcanicVent:generateList()
             local poiTitle        = GetPOIInfo(zoneIdx, poiIdx)
             zoneData.list.title.ln[poiListIdx] = zo_strformat(poiTitle)
             -- force cardinal point to be the POI title (removing "volcanic vent"), even if user has changed preferred label type
-            zoneData.list.title.cp[poiListIdx] = zo_strformat(poiTitle):gsub(" Volcanic Vent","")
+            zoneData.list.title.cp[poiListIdx] = zo_strformat(poiTitle)
         end
     end
 

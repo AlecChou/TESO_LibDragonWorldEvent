@@ -13,17 +13,25 @@ LibWorldEvents.POI.VolcanicVent.list = {
         mapName = "systres/u34_systreszone_base",
         list    = {
             title = {
-                cp = {},
+                cp = {
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_WEST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
+                    [3] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
+                    [4] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
+                    [5] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")",
+                    [6] = GetString(SI_LIB_WORLD_EVENTS_CP_CENTER) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")",
+                    [7] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")"
+                },
                 ln = {} --generated in generateList()
             },
             poiIDs = {
-                [1] = 2492, -- Sapphire Point
+                [1] = 2495, -- Garick's Rise
                 [2] = 2493, -- Navire
                 [3] = 2494, -- Feywatch Isle
-                [4] = 2495, -- Garick's Rise
-                [5] = 2496, -- Serpents Hollow
-                [6] = 2497, -- Haunted Coast
-                [7] = 2498, -- Flooded Coast
+                [4] = 2492, -- Sapphire Point
+                [5] = 2498, -- Flooded Coast
+                [6] = 2496, -- Serpents Hollow
+                [7] = 2497 -- Haunted Coast
             }
         }
     }
@@ -39,8 +47,6 @@ function LibWorldEvents.POI.VolcanicVent:generateList()
             local zoneIdx, poiIdx = GetPOIIndices(poiId)
             local poiTitle        = GetPOIInfo(zoneIdx, poiIdx)
             zoneData.list.title.ln[poiListIdx] = zo_strformat(poiTitle)
-            -- force cardinal point to be the POI title (removing "volcanic vent"), even if user has changed preferred label type
-            zoneData.list.title.cp[poiListIdx] = zo_strformat(poiTitle)
         end
     end
 

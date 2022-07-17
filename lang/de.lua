@@ -9,11 +9,15 @@ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH",      "Süden")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_EAST", "Südosten")
 --ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_CENTER", "South Center")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_WEST", "Südwesten")
--- ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_WEST",         "West")
--- ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_EAST",         "East")
--- ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER",       "Center")
+ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_WEST",         "Westen")
+ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_EAST",         "Osten")
+ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER",       "Mitte")
 -- ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_EAST",  "Center East")
 -- ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_WEST",  "Center West")
+
+-- SubZone Names
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE", "Hochinsel")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS",    "Amenos")
 
 -- Location names
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_PROWLS_EDGE", "Rand der Jagd") -- North

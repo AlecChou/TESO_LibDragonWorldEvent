@@ -6,6 +6,12 @@ LibWorldEvents.POI.VolcanicVent.onMap = false
 -- @var bool isGenerated To know if the list has been generated or not
 LibWorldEvents.POI.VolcanicVent.isGenerated = false
 
+-- @var table List of all subzone where Volcanic Vent are present (used by HighIsle/Amenos cardinals points)
+LibWorldEvents.POI.VolcanicVent.SubZone = {
+    highIsle = GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE),
+    amenos   = GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS)
+}
+
 -- @var table List of all zone with volcanicVents world events
 LibWorldEvents.POI.VolcanicVent.list = {
     { -- High Isle
@@ -14,13 +20,13 @@ LibWorldEvents.POI.VolcanicVent.list = {
         list    = {
             title = {
                 cp = {
-                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
-                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_WEST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
-                    [3] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
-                    [4] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE) .. ")",
-                    [5] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")",
-                    [6] = GetString(SI_LIB_WORLD_EVENTS_CP_CENTER) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")",
-                    [7] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. GetString(SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS) .. ")"
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.highIsle .. ")",
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_WEST) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.highIsle .. ")",
+                    [3] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.highIsle .. ")",
+                    [4] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.highIsle .. ")",
+                    [5] = GetString(SI_LIB_WORLD_EVENTS_CP_EAST) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.amenos .. ")",
+                    [6] = GetString(SI_LIB_WORLD_EVENTS_CP_CENTER) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.amenos .. ")",
+                    [7] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH) .. " (" .. LibWorldEvents.POI.VolcanicVent.SubZone.amenos .. ")"
                 },
                 ln = {} --generated in generateList()
             },

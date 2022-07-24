@@ -2,7 +2,7 @@
 ## Description: Lib to know World Events info
 ## Version: 2.1.1
 ## Author: bulton-fr
-## APIVersion: 101032
+## APIVersion: 101034
 ## IsLibrary: true
 
 lang\en.lua
@@ -20,6 +20,7 @@ POI/POIStatus.lua
 POI/Dolmen.lua
 POI/Geyser.lua
 POI/HarrowStorms.lua
+POI/VolcanicVent.lua
 Events.lua
 Timer.lua
 FlyTimer.lua

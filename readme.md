@@ -70,6 +70,7 @@ There are loaded in order :
 * POI/Dolmen.lua
 * POI/Geyser.lua
 * POI/HarrowStorms.lua
+* POI/VolcanicVent.lua
 * Events.lua
 * Timer.lua
 * FlyTimer.lua
@@ -460,6 +461,22 @@ Methods :
 
 * `LibWorldEvents.POI.HarrowStorms:generateList` : Obtain and add the location name of all POI to the list
 * `LibWorldEvents.POI.HarrowStorms:obtainList` : To obtain the zone's list where a harrowStorms world event can happen
+
+### POI/VolcanicVent.lua
+
+Table : `LibWorldEvents.POI.VolcanicVent`
+
+Contains all data about zone where volcanic vents are present
+
+Property :
+
+* `onMap` : To know if the user is on a map where volcanic vents world event can happen
+* `isGenerated` : To know if the list has been generated or not
+* `list` : List of all zone with volcanic vents world events
+
+Methods :
+* `LibWorldEvents.POI.VolcanicVent:generateList` : Obtain and add the location name of all POI to the list
+* `LibWorldEvents.POI.VolcanicVent:obtainList` : To obtain the zone's list where a volcanic vents world event can happen
 
 ### Events.lua
 

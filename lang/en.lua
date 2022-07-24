@@ -15,6 +15,10 @@ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER",       "Center")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_EAST",  "Center East")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_WEST",  "Center West")
 
+-- SubZone Names
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE", "High Isle")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS",    "Amenos")
+
 -- Location names
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_PROWLS_EDGE", "Prowl's Edge") -- North
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_SANDBLOWN",   "Sandblown") -- South-East

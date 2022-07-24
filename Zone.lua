@@ -2,10 +2,10 @@ LibWorldEvents.Zone = {}
 
 -- @var table All managed world event type
 LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
-    DRAGON      = "dragon",
-    HARROWSTORM = "harrowstorm",
-    GEYSER      = "geyser",
-    DOLMEN      = "dolmen",
+    DRAGON        = "dragon",
+    HARROWSTORM   = "harrowstorm",
+    GEYSER        = "geyser",
+    DOLMEN        = "dolmen",
     VOLCANIC_VENT = "volcanicvent",
     -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged yet
 }
@@ -17,13 +17,13 @@ LibWorldEvents.Zone.onWorldEventMap = false
 LibWorldEvents.Zone.worldEventMapType = nil
 
 -- @var nil|number The previous ZoneId
-LibWorldEvents.Zone.lastZoneId   = nil
+LibWorldEvents.Zone.lastZoneId = nil
 
 -- @var boolean If the player has changed zone
-LibWorldEvents.Zone.changedZone  = false
+LibWorldEvents.Zone.changedZone = false
 
 -- @var ref-to-table Info about the current zone (ref to list value corresponding to the zone)
-LibWorldEvents.Zone.info         = nil
+LibWorldEvents.Zone.info = nil
 
 --[[
 -- Update info about the current zone.
@@ -69,10 +69,10 @@ end
 function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     self:resetZoneData()
 
-    local dragonsZoneList     = LibWorldEvents.Dragons.ZoneInfo:obtainList()
-    local harrowstormZoneList = LibWorldEvents.POI.HarrowStorms:obtainList()
-    local geyserZoneList      = LibWorldEvents.POI.Geyser:obtainList()
-    local dolmenZoneList      = LibWorldEvents.POI.Dolmen:obtainList()
+    local dragonsZoneList      = LibWorldEvents.Dragons.ZoneInfo:obtainList()
+    local harrowstormZoneList  = LibWorldEvents.POI.HarrowStorms:obtainList()
+    local geyserZoneList       = LibWorldEvents.POI.Geyser:obtainList()
+    local dolmenZoneList       = LibWorldEvents.POI.Dolmen:obtainList()
     local volcanicVentZoneList = LibWorldEvents.POI.VolcanicVent:obtainList()
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
@@ -145,7 +145,7 @@ function LibWorldEvents.Zone:initWorldEvent()
             return
         end
 
-            LibWorldEvents.POI.POIList:update()
+        LibWorldEvents.POI.POIList:update()
         LibWorldEvents.POI.POIStatus:checkAllPOI()
     end
 end

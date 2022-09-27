@@ -3,7 +3,7 @@
 ## Version: 2.2.0
 ## AddOnVersion: 220
 ## Author: bulton-fr
-## APIVersion: 101034
+## APIVersion: 101036
 ## IsLibrary: true
 
 lang\en.lua

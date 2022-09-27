@@ -40,6 +40,29 @@ LibWorldEvents.POI.VolcanicVent.list = {
                 [7] = 2497 -- Haunted Coast
             }
         }
+    },
+    { -- Galen
+        zoneId  = 1383,
+        mapName = "galen/u36_galenisland_base",
+        list    = {
+            title = {
+                cp = {
+                    [1] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_WEST),
+                    [2] = GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_EAST),
+                    [3] = GetString(SI_LIB_WORLD_EVENTS_CP_CENTER),
+                    [4] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_EAST),
+                    [5] = GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_WEST)
+                },
+                ln = {} --generated in generateList()
+            },
+            poiIDs = {
+                [1] = 2563, -- Longue pointe
+                [2] = 2564, -- Llanshara
+                [3] = 2565, -- Pierre de parole
+                [4] = 2566, -- Côtes est
+                [5] = 2562, -- Faubourgs de Vastyr
+            }
+        }
     }
 }
 

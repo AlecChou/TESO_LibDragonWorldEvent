@@ -91,7 +91,7 @@ function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
         return
     end
 
-    -- d(zo_strformat("New woldEvent #<<1>>", worldEventInstanceId))
+    -- d(zo_strformat("WE Activate #<<1>>", worldEventInstanceId))
 
     if LibWorldEvents.Dragons.ZoneInfo.onMap == true then
         local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
@@ -133,6 +133,8 @@ function LibWorldEvents.Events.onWEDeactivate(eventCode, worldEventInstanceId)
         return
     end
 
+    -- d(zo_strformat("WE Deactivate #<<1>>", worldEventInstanceId))
+
     if LibWorldEvents.Dragons.ZoneInfo.onMap == true then
         local dragon = LibWorldEvents.Dragons.DragonList:obtainForWEInstanceId(worldEventInstanceId)
 
@@ -171,6 +173,8 @@ function LibWorldEvents.Events.onWEUnitPin(eventCode, worldEventInstanceId, unit
     if LibWorldEvents.ready == false then
         return
     end
+
+    -- d(zo_strformat("WE UnitPin #<<1>> - <<2>> - <<3>> - <<4>>", worldEventInstanceId, unitTag, oldPinType, newPinType))
 
     if LibWorldEvents.Dragons.ZoneInfo.onMap == false then
         return

@@ -19,6 +19,12 @@ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_WEST",  "Centre-Ouest")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE", "Île-Haute")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS",    "Amenos")
 
+-- Cyrodiil special CP
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH_OF", "Nord de/du <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_EAST_OF",  "Est de/du <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_WEST_OF",  "Ouest de/du <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_OF", "Sud de/du <<1>>")
+
 -- Location names
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_PROWLS_EDGE", "Bord de Traque") -- North
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_LN_SANDBLOWN",   "Balayée par les sables") -- South-East

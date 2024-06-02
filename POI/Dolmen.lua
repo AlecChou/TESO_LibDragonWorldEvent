@@ -292,6 +292,40 @@ LibWorldEvents.POI.Dolmen.list = {
                 [3] = 801, --Smokefrost Peaks Dolmen
             },
         },
+    },
+    {
+        -- Cyrodiil
+        zoneId  = 181,
+        mapName = "cyrodiil/ava_whole",
+        list    = {
+            title = {
+                cp = {
+                    [1]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_WEST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_OF), GetKeepName(149))),
+                    [2]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_WEST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_WEST_OF), GetKeepName(132))),
+                    [3]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_EAST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_WEST_OF), GetKeepName(157))),
+                    [4]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_WEST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_OF), GetKeepName(7))),
+                    [5]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_EAST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_EAST_OF), GetKeepName(163))),
+                    [6]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_CENTER), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_OF), GetKeepName(7))),
+                    [7]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_CENTER_EAST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_WEST_OF), GetKeepName(13))),
+                    [8]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_EAST), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_SOUTH_OF), GetKeepName(133))),
+                    [9]  = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_CENTER), zo_strformat(GetString(SI_LIB_WORLD_EVENTS_CP_WEST_OF), GetKeepName(8))),
+                    [10] = zo_strformat("<<1>> (<<2>>)", GetString(SI_LIB_WORLD_EVENTS_CP_NORTH_CENTER), GetKeepName(151))
+                },
+                ln = {} --generated in generateList()
+            },
+            poiIDs = {
+                [1]  = 1015, --Vertepâtures (Nord de Vlastarus)
+                [2]  = 1016, --Grande forêt (Ouest Nikel)
+                [3]  = 1017, --Vallée du Nibanais (Ouest pont de la baie)
+                [4]  = 1021, --Bois de Guettepomme (Nord Aleswell)
+                [5]  = 1022, --Allonge hivernale (Est sommet de l'hiver)
+                [6]  = 1023, --Côte nord-ouest (Sud Aleswell)
+                [7]  = 1025, --Côte est (Ouest BRK)
+                [8]  = 1026, --Bassin de la Nibène (Sud de Sejanus)
+                [9]  = 1028, --Contreforts de Cheydinhal (Ouest Griffe du dragon ?)
+                [10] = 515, --Bruma
+            },
+        },
     }
 }
 

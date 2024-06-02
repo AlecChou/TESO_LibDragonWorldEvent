@@ -15,6 +15,12 @@ ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER",       "Center")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_EAST",  "Center East")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_CENTER_WEST",  "Center West")
 
+-- Cyrodiil special CP
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_NORTH_OF", "North of <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_EAST_OF",  "East of <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_WEST_OF",  "West of <<1>>")
+ZO_CreateStringId("SI_LIB_WORLD_EVENTS_CP_SOUTH_OF", "South of <<1>>")
+
 -- SubZone Names
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_HIGH_ISLE", "High Isle")
 ZO_CreateStringId("SI_LIB_WORLD_EVENTS_SUBZONE_AMENOS",    "Amenos")

@@ -21,6 +21,7 @@ POI/POIStatus.lua
 POI/Dolmen.lua
 POI/Geyser.lua
 POI/HarrowStorms.lua
+POI/Mirrormoor.lua
 POI/VolcanicVent.lua
 Events.lua
 Timer.lua

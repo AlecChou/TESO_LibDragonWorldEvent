@@ -7,7 +7,9 @@ LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
     GEYSER        = "geyser",
     DOLMEN        = "dolmen",
     VOLCANIC_VENT = "volcanicvent",
-    -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged yet
+    -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged
+    -- NYMIC = "nymic" -- Not plugged
+    MIRRORMOOR    = "mirrormoor",
 }
 
 -- @var boolean If player is on a map with world events
@@ -59,6 +61,7 @@ function LibWorldEvents.Zone:resetZoneData()
     LibWorldEvents.POI.Geyser.onMap       = false
     LibWorldEvents.POI.Dolmen.onMap       = false
     LibWorldEvents.POI.VolcanicVent.onMap = false
+    LibWorldEvents.POI.Mirrormoor.onMap   = false
 end
 
 --[[
@@ -74,12 +77,14 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     local geyserZoneList       = LibWorldEvents.POI.Geyser:obtainList()
     local dolmenZoneList       = LibWorldEvents.POI.Dolmen:obtainList()
     local volcanicVentZoneList = LibWorldEvents.POI.VolcanicVent:obtainList()
+    local mirrormoorZoneList   = LibWorldEvents.POI.Mirrormoor:obtainList()
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.HARROWSTORM, harrowstormZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.GEYSER, geyserZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DOLMEN, dolmenZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.VOLCANIC_VENT, volcanicVentZoneList)
+    self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.MIRRORMOOR, mirrormoorZoneList)
 
     -- If we are in a dungeon/delve/battleground or in an house : no world event.
     if IsUnitInDungeon("player") or GetCurrentZoneHouseId() ~= 0 then
@@ -140,6 +145,8 @@ function LibWorldEvents.Zone:initWorldEvent()
             LibWorldEvents.POI.Dolmen.onMap = true
         elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.VOLCANIC_VENT then
             LibWorldEvents.POI.VolcanicVent.onMap = true
+        elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.MIRRORMOOR then
+            LibWorldEvents.POI.Mirrormoor.onMap = true
         else
             -- d("unknown event")
             return

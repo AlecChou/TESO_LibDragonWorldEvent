@@ -116,9 +116,9 @@ LibWorldEvents.POI.Dolmen.list = {
                 ln = {} --generated in generateList()
             },
             poiIDs = {
-                [1] = 771, --Iluvamir Dolmen
+                [1] = 773, --Vafe Dolmen
                 [2] = 772, --Calambar Dolmen
-                [3] = 773, --Vafe Dolmen
+                [3] = 771, --Iluvamir Dolmen
             },
         },
     },

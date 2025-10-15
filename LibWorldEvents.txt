@@ -1,9 +1,9 @@
 ## Title: LibWorldEvents
 ## Description: Lib to know World Events info
-## Version: 2.4.1
-## AddOnVersion: 241
+## Version: 2.5.0
+## AddOnVersion: 250
 ## Author: bulton-fr
-## APIVersion: 101042
+## APIVersion: 101047
 ## IsLibrary: true
 
 lang\en.lua

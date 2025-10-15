@@ -71,6 +71,7 @@ There are loaded in order :
 * POI/Geyser.lua
 * POI/HarrowStorms.lua
 * POI/VolcanicVent.lua
+* POI/Writhing.lua
 * Events.lua
 * Timer.lua
 * FlyTimer.lua
@@ -78,6 +79,7 @@ There are loaded in order :
 * Run.lua
   
 When needed to obtain POI ID on a zone, there are also (by default not loaded)
+
 * POIList.lua
 * POIList.xml
 
@@ -475,8 +477,26 @@ Property :
 * `list` : List of all zone with volcanic vents world events
 
 Methods :
+
 * `LibWorldEvents.POI.VolcanicVent:generateList` : Obtain and add the location name of all POI to the list
 * `LibWorldEvents.POI.VolcanicVent:obtainList` : To obtain the zone's list where a volcanic vents world event can happen
+
+### POI/Writhing.lua
+
+Table : `LibWorldEvents.POI.Writhing`
+
+Contains all data about zone where writhing wall event are present
+
+Property :
+
+* `onMap` : To know if the user is on a map where writhing wall event can happen
+* `isGenerated` : To know if the list has been generated or not
+* `list` : List of all zone with writhing wall event
+
+Methods :
+
+* `LibWorldEvents.POI.Writhing:generateList` : Obtain and add the location name of all POI to the list
+* `LibWorldEvents.POI.Writhing:obtainList` : To obtain the zone's list where a writhing wall events can happen
 
 ### Events.lua
 

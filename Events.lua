@@ -105,7 +105,9 @@ function LibWorldEvents.Events.onWEActivate(eventCode, worldEventInstanceId)
         LibWorldEvents.POI.HarrowStorms.onMap == true or
         LibWorldEvents.POI.Geyser.onMap == true or
         LibWorldEvents.POI.Dolmen.onMap == true or
-        LibWorldEvents.POI.VolcanicVent.onMap == true
+        LibWorldEvents.POI.VolcanicVent.onMap == true or
+        LibWorldEvents.POI.Mirrormoor.onMap == true or
+        LibWorldEvents.POI.Writhing.onMap == true
     then
         -- d("WEACtivate for poi")
 
@@ -147,7 +149,9 @@ function LibWorldEvents.Events.onWEDeactivate(eventCode, worldEventInstanceId)
         LibWorldEvents.POI.HarrowStorms.onMap == true or
         LibWorldEvents.POI.Geyser.onMap == true or
         LibWorldEvents.POI.Dolmen.onMap == true or
-        LibWorldEvents.POI.VolcanicVent.onMap == true
+        LibWorldEvents.POI.VolcanicVent.onMap == true or
+        LibWorldEvents.POI.Mirrormoor.onMap == true or
+        LibWorldEvents.POI.Writhing.onMap == true
     then
         local poi = LibWorldEvents.POI.POIList:obtainLastActive()
 

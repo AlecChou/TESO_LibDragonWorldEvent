@@ -10,6 +10,7 @@ LibWorldEvents.Zone.WORLD_EVENT_TYPE = {
     -- OBLIVON_PORTAL = "oblivon portal" -- Not plugged
     -- NYMIC = "nymic" -- Not plugged
     MIRRORMOOR    = "mirrormoor",
+    WRITHING      = "writhing",
 }
 
 -- @var boolean If player is on a map with world events
@@ -62,6 +63,7 @@ function LibWorldEvents.Zone:resetZoneData()
     LibWorldEvents.POI.Dolmen.onMap       = false
     LibWorldEvents.POI.VolcanicVent.onMap = false
     LibWorldEvents.POI.Mirrormoor.onMap   = false
+    LibWorldEvents.POI.Writhing.onMap     = false
 end
 
 --[[
@@ -78,6 +80,7 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     local dolmenZoneList       = LibWorldEvents.POI.Dolmen:obtainList()
     local volcanicVentZoneList = LibWorldEvents.POI.VolcanicVent:obtainList()
     local mirrormoorZoneList   = LibWorldEvents.POI.Mirrormoor:obtainList()
+    local writhingZoneList     = LibWorldEvents.POI.Writhing:obtainList()
 
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DRAGON, dragonsZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.HARROWSTORM, harrowstormZoneList)
@@ -85,6 +88,7 @@ function LibWorldEvents.Zone:checkWorldEvent(currentZoneId)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.DOLMEN, dolmenZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.VOLCANIC_VENT, volcanicVentZoneList)
     self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.MIRRORMOOR, mirrormoorZoneList)
+    self:checkWorldEventForType(currentZoneId, self.WORLD_EVENT_TYPE.WRITHING, writhingZoneList)
 
     -- If we are in a dungeon/delve/battleground or in an house : no world event.
     if IsUnitInDungeon("player") or GetCurrentZoneHouseId() ~= 0 then
@@ -147,6 +151,8 @@ function LibWorldEvents.Zone:initWorldEvent()
             LibWorldEvents.POI.VolcanicVent.onMap = true
         elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.MIRRORMOOR then
             LibWorldEvents.POI.Mirrormoor.onMap = true
+        elseif self.worldEventMapType == self.WORLD_EVENT_TYPE.WRITHING then
+            LibWorldEvents.POI.Writhing.onMap = true
         else
             -- d("unknown event")
             return

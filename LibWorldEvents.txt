@@ -23,6 +23,7 @@ POI/Geyser.lua
 POI/HarrowStorms.lua
 POI/Mirrormoor.lua
 POI/VolcanicVent.lua
+POI/Writhing.lua
 Events.lua
 Timer.lua
 FlyTimer.lua
